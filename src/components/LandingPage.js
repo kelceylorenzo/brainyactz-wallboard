@@ -6,7 +6,8 @@ class LandingPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cities: null
+			cities: null,
+			addCity: ''
 		};
 	}
 
@@ -16,18 +17,39 @@ class LandingPage extends Component {
 			state: 'cities'
 		});
 	}
+
+	handleInputChange = (event) => {
+		this.setState({
+			addCity: event.target.value
+		});
+	};
+
+	handleFormSubmit = (event) => {
+		event.preventDefault();
+		console.log('submitting form');
+	};
+
 	render() {
 		let cities = null;
 		if (this.state.cities) {
 			cities = Object.keys(this.state.cities).map((currentCity, index) => {
-				return <p key={index}>{this.state.cities[currentCity]}</p>;
+				return <button key={index}>{this.state.cities[currentCity]}</button>;
 			});
 		}
-		console.log('landing page state: ', this.state);
 		return (
 			<div>
 				<h2>BrainyActz Wallboard</h2>
 				{cities}
+				<form onSubmit={this.handleFormSubmit}>
+					<input
+						type="text"
+						name="add-city"
+						value={this.state.addCity}
+						placeholder="Add New City"
+						onChange={this.handleInputChange}
+					/>
+					<button>Add City</button>
+				</form>
 			</div>
 		);
 	}
