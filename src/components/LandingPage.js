@@ -7,7 +7,7 @@ class LandingPage extends Component {
 		super(props);
 		this.state = {
 			cities: null,
-			addCity: ''
+			cityToAdd: ''
 		};
 	}
 
@@ -20,13 +20,20 @@ class LandingPage extends Component {
 
 	handleInputChange = (event) => {
 		this.setState({
-			addCity: event.target.value
+			cityToAdd: event.target.value
 		});
 	};
 
 	handleFormSubmit = (event) => {
 		event.preventDefault();
-		console.log('submitting form');
+		const { cities, cityToAdd } = this.state;
+
+		cities[`city${Date.now()}`] = cityToAdd;
+
+		this.setState({
+			cities,
+			cityToAdd: ''
+		});
 	};
 
 	render() {
@@ -44,7 +51,7 @@ class LandingPage extends Component {
 					<input
 						type="text"
 						name="add-city"
-						value={this.state.addCity}
+						value={this.state.cityToAdd}
 						placeholder="Add New City"
 						onChange={this.handleInputChange}
 					/>
