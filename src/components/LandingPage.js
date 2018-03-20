@@ -32,6 +32,7 @@ class LandingPage extends Component {
 			this.setState({
 				cityToAdd: ''
 			});
+
 			return;
 		}
 
