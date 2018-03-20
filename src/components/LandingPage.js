@@ -28,6 +28,13 @@ class LandingPage extends Component {
 		event.preventDefault();
 		const { cities, cityToAdd } = this.state;
 
+		if (cityToAdd.trim() === '') {
+			this.setState({
+				cityToAdd: ''
+			});
+			return;
+		}
+
 		cities[`city${Date.now()}`] = cityToAdd;
 
 		this.setState({
