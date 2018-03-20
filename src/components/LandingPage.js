@@ -32,11 +32,10 @@ class LandingPage extends Component {
 			this.setState({
 				cityToAdd: ''
 			});
-
 			return;
 		}
 
-		cities[`city${Date.now()}`] = cityToAdd;
+		cities[cityToAdd] = {};
 
 		this.setState({
 			cities,
@@ -44,17 +43,30 @@ class LandingPage extends Component {
 		});
 	};
 
+	redirectToCityPage = (event) => {
+		let selectedCity = event.target.value
+			.toLowerCase()
+			.slice(0, -4)
+			.replace(' ', '-');
+
+		this.props.history.push(`/${selectedCity}`);
+	};
+
 	render() {
-		let cities = null;
+		let citiesToRender = null;
 		if (this.state.cities) {
-			cities = Object.keys(this.state.cities).map((currentCity, index) => {
-				return <button key={index}>{this.state.cities[currentCity]}</button>;
+			citiesToRender = Object.keys(this.state.cities).map((currentCity, index) => {
+				return (
+					<button key={index} value={currentCity} onClick={this.redirectToCityPage}>
+						{currentCity}
+					</button>
+				);
 			});
 		}
 		return (
 			<div>
 				<h2>BrainyActz Wallboard</h2>
-				{cities}
+				{citiesToRender}
 				<form onSubmit={this.handleFormSubmit}>
 					<input
 						type="text"
