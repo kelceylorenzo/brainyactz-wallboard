@@ -6,15 +6,15 @@ class LandingPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cities: null,
+			dbInfo: null,
 			cityToAdd: ''
 		};
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState('/cities', {
+		base.syncState('/cities', {
 			context: this,
-			state: 'cities'
+			state: 'dbInfo'
 		});
 	}
 
@@ -26,27 +26,59 @@ class LandingPage extends Component {
 
 	handleFormSubmit = (event) => {
 		event.preventDefault();
-		const { cities, cityToAdd } = this.state;
+		const { dbInfo, cityToAdd } = this.state;
 
-		cities[`city${Date.now()}`] = cityToAdd;
+		if (cityToAdd.trim() === '') {
+			this.setState({
+				cityToAdd: ''
+			});
+			return;
+		}
+
+		let newTableRoot = cityToAdd
+			.toLowerCase()
+			.slice(0, -4)
+			.replace(' ', '-');
+
+		let newTable = {};
+		newTable[newTableRoot] = { name: cityToAdd, rooms: { default: 'default' } };
+
+		base.update('/', {
+			data: newTable
+		});
+
+		dbInfo[Date.now()] = cityToAdd;
 
 		this.setState({
-			cities,
+			dbInfo,
 			cityToAdd: ''
 		});
 	};
 
+	redirectToCityPage = (event) => {
+		let selectedCity = event.target.value
+			.toLowerCase()
+			.slice(0, -4)
+			.replace(' ', '-');
+
+		this.props.history.push(`/${selectedCity}`);
+	};
+
 	render() {
-		let cities = null;
-		if (this.state.cities) {
-			cities = Object.keys(this.state.cities).map((currentCity, index) => {
-				return <button key={index}>{this.state.cities[currentCity]}</button>;
+		let citiesToRender = 'Loading...';
+		if (this.state.dbInfo) {
+			citiesToRender = Object.keys(this.state.dbInfo).map((currentCity, index) => {
+				return (
+					<button key={index} value={this.state.dbInfo[currentCity]} onClick={this.redirectToCityPage}>
+						{this.state.dbInfo[currentCity]}
+					</button>
+				);
 			});
 		}
 		return (
 			<div>
-				<h2>BrainyActz Wallboard</h2>
-				{cities}
+				<h2>BrainyActz Wallboards</h2>
+				{citiesToRender}
 				<form onSubmit={this.handleFormSubmit}>
 					<input
 						type="text"
