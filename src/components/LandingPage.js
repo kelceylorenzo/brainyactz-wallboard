@@ -6,8 +6,8 @@ class LandingPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			dbInfo: null,
-			cityToAdd: ''
+			locations: {},
+			locationToAdd: ''
 		};
 	}
 
@@ -20,7 +20,7 @@ class LandingPage extends Component {
 
 	handleInputChange = (event) => {
 		this.setState({
-			cityToAdd: event.target.value
+			locationToAdd: event.target.value
 		});
 	};
 
@@ -30,7 +30,7 @@ class LandingPage extends Component {
 
 		if (cityToAdd.trim() === '') {
 			this.setState({
-				cityToAdd: ''
+				locationToAdd: ''
 			});
 			return;
 		}
@@ -51,7 +51,7 @@ class LandingPage extends Component {
 
 		this.setState({
 			dbInfo,
-			cityToAdd: ''
+			locationToAdd: ''
 		});
 	};
 
