@@ -44,11 +44,7 @@ class LandingPage extends Component {
 		locations[newLocation] = { name: locationToAdd };
 
 		this.setState({
-<<<<<<< HEAD
-			dbInfo,
-=======
 			locations,
->>>>>>> d2a19404670d5821b666f8030f0d14dd727bc5e2
 			locationToAdd: ''
 		});
 	};
