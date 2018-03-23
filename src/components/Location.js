@@ -7,7 +7,8 @@ class Location extends Component {
 		super(props);
 		this.state = {
 			walls: {},
-			wallToAdd: ''
+			wallToAdd: '',
+			title: {}
 		};
 	}
 
@@ -16,6 +17,15 @@ class Location extends Component {
 			context: this,
 			state: 'walls'
 		});
+
+		base.syncState(`/locations/${this.props.location.pathname}/`, {
+			context: this,
+			state: 'title'
+		});
+	}
+
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
 	}
 
 	handleWallInputChange = (event) => {
@@ -58,7 +68,7 @@ class Location extends Component {
 
 		return (
 			<div>
-				<h2>Title Placeholder</h2>
+				<h2>{this.state.title.name} - Wallboards</h2>
 				<form onSubmit={this.handleWallFormSubmit}>
 					<input
 						type="text"

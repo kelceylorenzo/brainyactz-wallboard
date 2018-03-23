@@ -11,11 +11,14 @@ class Wall extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 		this.ref = base.syncState(`/locations/${this.props.pathname}/walls/${this.props.index}/boards`, {
 			context: this,
 			state: 'boards'
 		});
+	}
+
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
 	}
 
 	handleBoardInputChange = (event) => {
@@ -26,8 +29,6 @@ class Wall extends Component {
 
 	handleBoardFormSubmit = (event) => {
 		event.preventDefault();
-
-		console.log('handleBoardFormSubmit called');
 
 		const { boards, boardToAdd } = this.state;
 

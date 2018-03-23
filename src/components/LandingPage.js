@@ -19,12 +19,6 @@ class LandingPage extends Component {
 		});
 	}
 
-	loadLocations = () => {
-		this.setState({
-			locations: sampleData
-		});
-	};
-
 	handleInputChange = (event) => {
 		this.setState({
 			locationToAdd: event.target.value
@@ -91,8 +85,6 @@ class LandingPage extends Component {
 					/>
 					<button>Add Location</button>
 				</form>
-
-				<button onClick={this.loadLocations}>Load Locations</button>
 			</div>
 		);
 	}
