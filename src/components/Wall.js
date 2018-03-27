@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import base from '../base';
 
 class Wall extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			boards: {},
-			boardToAdd: ''
+			collections: {},
+			collectionToAdd: ''
 		};
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState(`/locations/${this.props.pathname}/walls/${this.props.index}/boards`, {
+		this.ref = base.syncState(`/locations/${this.props.pathname}/walls/${this.props.index}/collections`, {
 			context: this,
-			state: 'boards'
+			state: 'collections'
 		});
 	}
 
@@ -21,55 +22,59 @@ class Wall extends Component {
 		base.removeBinding(this.ref);
 	}
 
-	handleBoardInputChange = (event) => {
+	handleCollectionInputChange = (event) => {
 		this.setState({
-			boardToAdd: event.target.value
+			collectionToAdd: event.target.value
 		});
 	};
 
-	handleBoardFormSubmit = (event) => {
+	handleCollectionFormSubmit = (event) => {
 		event.preventDefault();
 
-		const { boards, boardToAdd } = this.state;
+		const { collections, collectionToAdd } = this.state;
 
-		if (boardToAdd.trim() === '') {
+		if (collectionToAdd.trim() === '') {
 			this.setState({
-				boardToAdd: ''
+				collectionToAdd: ''
 			});
 			return;
 		}
 
-		boards[Date.now()] = { name: boardToAdd };
+		collections[Date.now()] = { name: collectionToAdd };
 
 		this.setState({
-			boards,
-			boardToAdd: ''
+			collections,
+			collectionToAdd: ''
 		});
 	};
 
 	render() {
-		let boardsToRender = Object.keys(this.state.boards).map((currentBoard, index) => {
+		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
-				<div key={index} index={currentBoard} name={this.state.boards[currentBoard].name}>
-					{this.state.boards[currentBoard].name}
-				</div>
+				<button
+					key={index}
+					name={this.state.collections[currentCollection].name}
+					onClick={() => this.props.redirectToCollectionPage(currentCollection, this.props.index)}
+				>
+					{this.state.collections[currentCollection].name}
+				</button>
 			);
 		});
 
 		return (
 			<div>
 				<h3>{this.props.name}</h3>
-				<form onSubmit={this.handleBoardFormSubmit}>
+				<form onSubmit={this.handleCollectionFormSubmit}>
 					<input
 						type="text"
-						name="add-board"
-						value={this.state.boardToAdd}
-						placeholder="Add New Board"
-						onChange={this.handleBoardInputChange}
+						name="add-collection"
+						value={this.state.collectionToAdd}
+						placeholder="Add New Collection"
+						onChange={this.handleCollectionInputChange}
 					/>
-					<button>Add Board</button>
+					<button>Add Collection</button>
 				</form>
-				{boardsToRender}
+				{collectionsToRender}
 			</div>
 		);
 	}

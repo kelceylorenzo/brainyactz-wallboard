@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default (props) => {
-	return <div>board</div>;
+	return <div>{props.name}</div>;
 };
