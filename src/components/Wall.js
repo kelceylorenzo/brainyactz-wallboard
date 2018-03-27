@@ -7,14 +7,27 @@ class Wall extends Component {
 		super(props);
 		this.state = {
 			collections: {},
-			collectionToAdd: ''
+			collectionToAdd: '',
+			title: '',
+			location: ''
 		};
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState(`/locations/${this.props.pathname}/collections`, {
+		const { location, wallId } = this.props.match.params;
+		this.ref = base.syncState(`/locations/${location}/collections`, {
 			context: this,
 			state: 'collections'
+		});
+
+		base.syncState(`/locations/${location}/walls/${wallId}/name`, {
+			context: this,
+			state: 'title'
+		});
+
+		base.syncState(`/locations/${location}/name`, {
+			context: this,
+			state: 'location'
 		});
 	}
 
@@ -48,13 +61,17 @@ class Wall extends Component {
 		});
 	};
 
+	redirectToCollectionPage = (collectionId, wallId) => {
+		this.props.history.push(`/${this.props.match.params.location}/${wallId}/${collectionId}`);
+	};
+
 	render() {
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
 				<button
 					key={index}
 					name={this.state.collections[currentCollection].name}
-					onClick={() => this.props.redirectToCollectionPage(currentCollection, this.props.index)}
+					onClick={() => this.redirectToCollectionPage(currentCollection, this.props.index)}
 				>
 					{this.state.collections[currentCollection].name}
 				</button>
@@ -63,7 +80,9 @@ class Wall extends Component {
 
 		return (
 			<div>
-				<h3>{this.props.name}</h3>
+				<h2>
+					{this.state.location} - {this.state.title}
+				</h2>
 				<form onSubmit={this.handleCollectionFormSubmit}>
 					<input
 						type="text"
