@@ -12,7 +12,7 @@ class Wall extends Component {
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState(`/locations/${this.props.pathname}/walls/${this.props.index}/collections`, {
+		this.ref = base.syncState(`/locations/${this.props.pathname}/collections`, {
 			context: this,
 			state: 'collections'
 		});
