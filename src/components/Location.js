@@ -8,7 +8,7 @@ class Location extends Component {
 		this.state = {
 			walls: {},
 			wallToAdd: '',
-			title: {}
+			title: ''
 		};
 	}
 
@@ -18,7 +18,7 @@ class Location extends Component {
 			state: 'walls'
 		});
 
-		base.syncState(`/locations/${this.props.location.pathname}/`, {
+		base.syncState(`/locations/${this.props.location.pathname}/name`, {
 			context: this,
 			state: 'title'
 		});
@@ -54,6 +54,10 @@ class Location extends Component {
 		});
 	};
 
+	redirectToCollectionPage = (collectionId, wallId) => {
+		this.props.history.push(`/${this.props.match.params.location}/${wallId}/${collectionId}`);
+	};
+
 	render() {
 		let wallsToRender = Object.keys(this.state.walls).map((currentWall, index) => {
 			return (
@@ -62,13 +66,14 @@ class Location extends Component {
 					index={currentWall}
 					name={this.state.walls[currentWall].name}
 					pathname={this.props.location.pathname}
+					redirectToCollectionPage={this.redirectToCollectionPage}
 				/>
 			);
 		});
 
 		return (
 			<div>
-				<h2>{this.state.title.name} - Wallboards</h2>
+				<h2>{this.state.title} - Wallboards</h2>
 				<form onSubmit={this.handleWallFormSubmit}>
 					<input
 						type="text"
