@@ -40,9 +40,7 @@ class Wall extends Component {
 			return;
 		}
 
-		const iD = Date.now();
-
-		collections[iD] = { name: collectionToAdd, location: iD };
+		collections[Date.now()] = { name: collectionToAdd };
 
 		this.setState({
 			collections,

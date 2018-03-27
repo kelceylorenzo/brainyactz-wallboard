@@ -14,7 +14,6 @@ class Collection extends Component {
 	}
 
 	componentDidMount() {
-		console.log(this.props);
 		const { collectionId, location, wallId } = this.props.match.params;
 		this.ref = base.syncState(`/locations/${location}/walls/${wallId}/collections/${collectionId}/boards`, {
 			context: this,
