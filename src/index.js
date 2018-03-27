@@ -2,6 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import Router from './components/Router';
-import TextBoard from './components/TextBoard';
+import EscapeRoom from './components/EscapeRoom';
 
-ReactDOM.render(<Router />, document.getElementById('root'));
+ReactDOM.render(<EscapeRoom />, document.getElementById('root'));
