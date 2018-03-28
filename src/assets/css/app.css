@@ -59,11 +59,44 @@ body {
 	grid-area: subtitle;
 }
 
-.page-content.escape-room {
+.page-content.escape-room,
+.escape-grid-item {
+	height: 100%;
+	width: 100%;
+	background-color: #d3f707;
+}
+
+.page-container.escape-grid {
 	display: grid;
+	grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+	justify-items: center;
+	grid-gap: 20px;
+	padding: 20px;
+}
+
+.page-title.escape-grid {
+	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 100%;
 	width: 100%;
-	background-color: rgba(165, 165, 165, 0.7);
+	font-size: 6rem;
+	background: linear-gradient(rgba(54, 54, 54, 0.4), rgba(54, 54, 54, 0.7), rgba(0, 0, 0, 0.8));
+}
+
+.page-container.social-feed {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-gap: 20px;
+	justify-items: center;
+	padding: 20px;
+}
+
+.page-content.social-feed-item {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	background: rgba(109, 109, 109, 0.8);
 }
