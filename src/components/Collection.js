@@ -15,12 +15,12 @@ class Collection extends Component {
 
 	componentDidMount() {
 		const { collectionId, location, wallId } = this.props.match.params;
-		this.ref = base.syncState(`/locations/${location}/walls/${wallId}/collections/${collectionId}/boards`, {
+		this.ref = base.syncState(`/locations/${location}/collections/${collectionId}/boards`, {
 			context: this,
 			state: 'boards'
 		});
 
-		base.syncState(`/locations/${location}/walls/${wallId}/collections/${collectionId}/name`, {
+		base.syncState(`/locations/${location}/collections/${collectionId}/name`, {
 			context: this,
 			state: 'collectionTitle'
 		});

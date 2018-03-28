@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Wall from './Wall';
 import base from '../base';
 
@@ -54,20 +55,12 @@ class Location extends Component {
 		});
 	};
 
-	redirectToCollectionPage = (collectionId, wallId) => {
-		this.props.history.push(`/${this.props.match.params.location}/${wallId}/${collectionId}`);
-	};
-
 	render() {
 		let wallsToRender = Object.keys(this.state.walls).map((currentWall, index) => {
 			return (
-				<Wall
-					key={index}
-					index={currentWall}
-					name={this.state.walls[currentWall].name}
-					pathname={this.props.location.pathname}
-					redirectToCollectionPage={this.redirectToCollectionPage}
-				/>
+				<Link key={index} to={`${this.props.match.params.location}/${currentWall}`}>
+					{this.state.walls[currentWall].name}
+				</Link>
 			);
 		});
 
