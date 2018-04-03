@@ -4,6 +4,7 @@ import LandingPage from './LandingPage';
 import Location from './Location';
 import Wall from './Wall';
 import Collection from './Collection';
+import NewBoardForm from './NewBoardForm';
 
 export default () => {
 	return (
@@ -13,6 +14,7 @@ export default () => {
 				<Route exact path="/:location" component={Location} />
 				<Route exact path="/:location/:wallId/" component={Wall} />
 				<Route exact path="/:location/:wallId/:collectionId" component={Collection} />
+				<Route exact path="/:location/:wallId/:collectionId/form" component={NewBoardForm} />
 				<Redirect to="/" />
 			</Switch>
 		</BrowserRouter>

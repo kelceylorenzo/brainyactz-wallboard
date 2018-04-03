@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Board from './Board';
 import base from '../base';
 
@@ -14,7 +15,7 @@ class Collection extends Component {
 	}
 
 	componentDidMount() {
-		const { collectionId, location, wallId } = this.props.match.params;
+		const { collectionId, location } = this.props.match.params;
 		this.ref = base.syncState(`/locations/${location}/collections/${collectionId}/boards`, {
 			context: this,
 			state: 'boards'
@@ -35,59 +36,15 @@ class Collection extends Component {
 		base.removeBinding(this.ref);
 	}
 
-	handleBoardInputChange = (event) => {
-		this.setState({
-			boardToAdd: event.target.value
-		});
-	};
-
-	handleBoardFormSubmit = (event) => {
-		event.preventDefault();
-
-		const { boards, boardToAdd } = this.state;
-
-		if (boardToAdd.trim() === '') {
-			this.setState({
-				boardToAdd: ''
-			});
-			return;
-		}
-
-		boards[Date.now()] = { name: boardToAdd };
-
-		this.setState({
-			boards,
-			boardToAdd: ''
-		});
-	};
-
 	render() {
-		let boardsToRender = Object.keys(this.state.boards).map((currentBoard, index) => {
-			return (
-				<Board
-					key={index}
-					index={currentBoard}
-					name={this.state.boards[currentBoard].name}
-					pathname={this.props.location.pathname}
-				/>
-			);
-		});
+		const { collectionId, location, wallId } = this.props.match.params;
 
 		return (
 			<div>
 				<h2>
 					{this.state.location} - "{this.state.collectionTitle}" Collection
 				</h2>
-				<form onSubmit={this.handleBoardFormSubmit}>
-					<input
-						type="text"
-						value={this.state.boardToAdd}
-						placeholder="Add New Board"
-						onChange={this.handleBoardInputChange}
-					/>
-					<button>Add Board</button>
-				</form>
-				{boardsToRender}
+				<Link to={`/${location}/${wallId}/${collectionId}/form`}>Add New Board</Link>
 			</div>
 		);
 	}
