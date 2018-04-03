@@ -61,8 +61,9 @@ class Wall extends Component {
 		});
 	};
 
-	redirectToCollectionPage = (collectionId, wallId) => {
-		this.props.history.push(`/${this.props.match.params.location}/${wallId}/${collectionId}`);
+	redirectToCollectionPage = (collectionId) => {
+		const { location, wallId } = this.props.match.params;
+		this.props.history.push(`/${location}/${wallId}/${collectionId}`);
 	};
 
 	render() {
@@ -71,7 +72,7 @@ class Wall extends Component {
 				<button
 					key={index}
 					name={this.state.collections[currentCollection].name}
-					onClick={() => this.redirectToCollectionPage(currentCollection, this.props.index)}
+					onClick={() => this.redirectToCollectionPage(currentCollection)}
 				>
 					{this.state.collections[currentCollection].name}
 				</button>
