@@ -38,6 +38,16 @@ class Collection extends Component {
 
 	render() {
 		const { collectionId, location, wallId } = this.props.match.params;
+		const { boards } = this.state;
+		let boardsToRender = Object.keys(boards).map((currentBoard, index) => {
+			return (
+				<div key={index}>
+					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
+						{boards[currentBoard].title}
+					</Link>
+				</div>
+			);
+		});
 
 		return (
 			<div>
@@ -45,6 +55,7 @@ class Collection extends Component {
 					{this.state.location} - "{this.state.collectionTitle}" Collection
 				</h2>
 				<Link to={`/${location}/${wallId}/${collectionId}/form`}>Add New Board</Link>
+				<div>{boardsToRender}</div>
 			</div>
 		);
 	}

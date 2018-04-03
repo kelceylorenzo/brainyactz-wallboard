@@ -27,18 +27,22 @@ body {
 	font-family: 'Playfair Display', serif;
 	font-size: 10rem;
 	color: #ffffff;
+	text-align: center;
 }
 
 .page-subtitle {
 	font-family: 'Abel';
 	font-size: 4rem;
 	color: #d3f707;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 .page-content {
 	font-family: 'Noto Serif', serif;
-	font-size: 2rem;
+	font-size: 1.6rem;
 	color: #b3afaf;
+	text-align: center;
 }
 
 .page-container.escape-room {

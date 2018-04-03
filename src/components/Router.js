@@ -5,6 +5,7 @@ import Location from './Location';
 import Wall from './Wall';
 import Collection from './Collection';
 import NewBoardForm from './NewBoardForm';
+import Board from './Board';
 
 export default () => {
 	return (
@@ -15,6 +16,7 @@ export default () => {
 				<Route exact path="/:location/:wallId/" component={Wall} />
 				<Route exact path="/:location/:wallId/:collectionId" component={Collection} />
 				<Route exact path="/:location/:wallId/:collectionId/form" component={NewBoardForm} />
+				<Route exact path="/:location/:wallId/:collectionId/:boardId" component={Board} />
 				<Redirect to="/" />
 			</Switch>
 		</BrowserRouter>
