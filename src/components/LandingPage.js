@@ -1,54 +1,89 @@
 import React, { Component } from 'react';
 import base from '../base';
+import sampleData from '../data';
 import '../assets/css/app.css';
 
 class LandingPage extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			cities: null,
-			addCity: ''
+			locations: {},
+			locationToAdd: ''
 		};
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState('/cities', {
+		this.ref = base.syncState('/locations', {
 			context: this,
-			state: 'cities'
+			state: 'locations'
 		});
 	}
 
 	handleInputChange = (event) => {
 		this.setState({
-			addCity: event.target.value
+			locationToAdd: event.target.value
 		});
 	};
 
 	handleFormSubmit = (event) => {
 		event.preventDefault();
-		console.log('submitting form');
+		const { locations, locationToAdd } = this.state;
+
+		if (locationToAdd.trim() === '') {
+			this.setState({
+				locationToAdd: ''
+			});
+			return;
+		}
+
+		let newLocation = locationToAdd
+			.toLowerCase()
+			.slice(0, -4)
+			.replace(' ', '-');
+
+		locations[newLocation] = { name: locationToAdd };
+
+		this.setState({
+			locations,
+			locationToAdd: ''
+		});
+	};
+
+	redirectToCityPage = (event) => {
+		let selectedLocation = event.target.value
+			.toLowerCase()
+			.slice(0, -4)
+			.replace(' ', '-');
+
+		this.props.history.push(`/${selectedLocation}`);
 	};
 
 	render() {
-		let cities = null;
-		if (this.state.cities) {
-			cities = Object.keys(this.state.cities).map((currentCity, index) => {
-				return <button key={index}>{this.state.cities[currentCity]}</button>;
-			});
-		}
+		let locationsToRender = Object.keys(this.state.locations).map((currentLocation, index) => {
+			return (
+				<button
+					key={index}
+					value={this.state.locations[currentLocation].name}
+					onClick={this.redirectToCityPage}
+				>
+					{this.state.locations[currentLocation].name}
+				</button>
+			);
+		});
+
 		return (
 			<div>
-				<h2>BrainyActz Wallboard</h2>
-				{cities}
+				<h2>BrainyActz Wallboards</h2>
+				{locationsToRender}
 				<form onSubmit={this.handleFormSubmit}>
 					<input
 						type="text"
-						name="add-city"
-						value={this.state.addCity}
-						placeholder="Add New City"
+						name="add-location"
+						value={this.state.locationToAdd}
+						placeholder="Add New Location"
 						onChange={this.handleInputChange}
 					/>
-					<button>Add City</button>
+					<button>Add Location</button>
 				</form>
 			</div>
 		);
