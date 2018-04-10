@@ -33,13 +33,9 @@ class Collection extends Component {
 	setActiveBoard = (event) => {
 		const { location, wallId } = this.props.match.params;
 
-		base
-			.post(`/locations/${location}/walls/${wallId}/active`, {
-				data: this.state.boards[event.target.attributes[0].nodeValue]
-			})
-			.then((err) => {
-				console.log(err);
-			});
+		base.post(`/locations/${location}/walls/${wallId}/active`, {
+			data: this.state.boards[event.target.name]
+		});
 	};
 
 	render() {
@@ -51,7 +47,8 @@ class Collection extends Component {
 					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
 						{boards[currentBoard].title}
 					</Link>
-					<button onClick={this.setActiveBoard} index={currentBoard}>
+					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}>Edit Board</Link>
+					<button onClick={this.setActiveBoard} name={currentBoard}>
 						Make Active
 					</button>
 				</div>
