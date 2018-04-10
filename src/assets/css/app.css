@@ -67,7 +67,8 @@ body {
 .escape-grid-item {
 	height: 100%;
 	width: 100%;
-	background-color: #d3f707;
+	background-color: rgb(61, 60, 60);
+	color: #d5d5d5;
 }
 
 .page-container.escape-grid {
@@ -103,4 +104,22 @@ body {
 	height: 100%;
 	width: 100%;
 	background: rgba(109, 109, 109, 0.8);
+}
+
+.leaderboard-container {
+	height: 100%;
+	display: grid;
+	grid-template-rows: repeat(6, 1fr);
+}
+
+.leaderboard-title {
+	font-size: 2em;
+	align-self: center;
+}
+
+.leaderboard-entry {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	align-items: center;
+	border-bottom: 1px solid #d3f707;
 }
