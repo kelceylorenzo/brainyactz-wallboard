@@ -32,26 +32,9 @@ class NewBoardForm extends Component {
 	};
 
 	submitForm = (formData) => {
-		// const { collectionId, location } = this.props.match.params;
-		// this.ref = base
-		// 	.push(`/locations/${location}/collections/${collectionId}/boards`, {
-		// 		data: boardData
-		// 	})
-		// 	.then(() => {
-		// 		this.setState({
-		// 			feedback: 'Board Created!'
-		// 		});
-		// 		return;
-		// 	})
-		// 	.catch(() => {
-		// 		this.setState({
-		// 			feedback: 'There was an issue creating your board; please try again.'
-		// 		});
-		// 		return;
-		// 	});
-
 		this.setState({
-			boardData: formData
+			boardData: formData,
+			feedback: 'Board Created!'
 		});
 	};
 
@@ -74,7 +57,7 @@ class NewBoardForm extends Component {
 					''
 				)}
 
-				{/* <div>{this.state.feedback}</div> */}
+				<div>{this.state.feedback}</div>
 			</div>
 		);
 	}

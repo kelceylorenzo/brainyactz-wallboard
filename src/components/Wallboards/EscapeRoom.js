@@ -25,7 +25,11 @@ export default (props) => {
 					/>
 				</div>
 				<div className="page-content escape-room">
-					<LeaderBoard leaderBoard={props.leaderBoard} />
+					{props.leaderBoard ? (
+						<LeaderBoard leaderBoard={props.leaderBoard} />
+					) : (
+						<div>Leader Board Coming Soon!</div>
+					)}
 				</div>
 			</div>
 		</div>
