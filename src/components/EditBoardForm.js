@@ -6,7 +6,8 @@ class EditBoardForm extends Component {
 		super(props);
 		this.state = {
 			originalBoardData: {},
-			editedBoardData: {}
+			editedBoardData: {},
+			feedback: ''
 		};
 	}
 
@@ -29,20 +30,27 @@ class EditBoardForm extends Component {
 
 	handleInputChange = (event) => {
 		const { name, value } = event.target;
-		const { form } = this.state;
+		const { editedBoardData } = this.state;
 
-		// form[name] = value;
+		editedBoardData[name] = value;
 
-		// this.setState({ form });
+		this.setState({ editedBoardData });
+	};
+
+	saveChanges = (event) => {
+		event.preventDefault();
+		this.setState({
+			originalBoardData: this.state.editedBoardData,
+			feedback: 'Changes Saved!'
+		});
 	};
 
 	render() {
-		console.log(this.state);
 		switch (this.state.editedBoardData.type) {
 			case 'text-board':
 				return (
 					<div>
-						<form>
+						<form onSubmit={this.saveChanges}>
 							<label>Title/Name:</label>
 							<input
 								type="text"
@@ -70,7 +78,9 @@ class EditBoardForm extends Component {
 								rows="5"
 								onChange={this.handleInputChange}
 							/>
+							<button>Save Changes</button>
 						</form>
+						<div>{this.state.feedback}</div>
 					</div>
 				);
 			case 'escape-room':
