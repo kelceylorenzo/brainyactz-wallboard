@@ -40,6 +40,7 @@ class Board extends Component {
 						subtitle={this.state.boardInfo.subtitle}
 						backgroundImage={this.state.boardInfo.backgroundImage}
 						videoId={this.state.boardInfo.video}
+						leaderBoard={this.state.boardInfo.leaderBoard}
 					/>
 				);
 			default:

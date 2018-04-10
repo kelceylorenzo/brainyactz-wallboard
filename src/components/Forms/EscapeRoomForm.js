@@ -11,13 +11,7 @@ class EscapeRoomForm extends Component {
 				subtitle: '',
 				video: '',
 				backgroundImage: '',
-				leaderBoard: {
-					firstPlace: {},
-					secondPlace: {},
-					thirdPlace: {},
-					fourthPlace: {},
-					fifthPlace: {}
-				}
+				leaderBoard: {}
 			},
 			leaderBoardStatus: false
 		};
@@ -48,7 +42,7 @@ class EscapeRoomForm extends Component {
 	};
 
 	updateLeaderBoard = (updatedLeaderBoard) => {
-		const form = this.state;
+		const { form } = this.state;
 		this.setState({
 			form: {
 				...form,
@@ -58,7 +52,6 @@ class EscapeRoomForm extends Component {
 	};
 
 	render() {
-		console.log(this.state.leaderBoardStatus);
 		return (
 			<div>
 				<form onSubmit={this.handleFormSubmit}>
@@ -95,14 +88,17 @@ class EscapeRoomForm extends Component {
 						onChange={this.handleInputChange}
 					/>
 					{this.state.leaderBoardStatus ? (
-						<LeaderBoardForm />
+						<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
 					) : (
-						<button type="button" onClick={this.toggleLeaderBoardForm}>
-							Add LeaderBoard
-						</button>
+						[
+							<button key="create" type="submit">
+								Create Board
+							</button>,
+							<button key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
+								Add LeaderBoard
+							</button>
+						]
 					)}
-
-					<button type="submit">Create Board</button>
 				</form>
 			</div>
 		);
