@@ -95,6 +95,8 @@ class Wall extends Component {
 					<button>Add Collection</button>
 				</form>
 				{collectionsToRender}
+
+				<Link to={`${this.props.match.url}/display`}>Display</Link>
 			</div>
 		);
 	}

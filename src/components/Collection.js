@@ -9,8 +9,7 @@ class Collection extends Component {
 		this.state = {
 			boards: {},
 			boardToAdd: '',
-			collectionTitle: '',
-			location: ''
+			collectionTitle: ''
 		};
 	}
 
@@ -25,16 +24,23 @@ class Collection extends Component {
 			context: this,
 			state: 'collectionTitle'
 		});
-
-		base.syncState(`/locations/${location}/name`, {
-			context: this,
-			state: 'location'
-		});
 	}
 
 	componentWillUnmount() {
 		base.removeBinding(this.ref);
 	}
+
+	setActiveBoard = (event) => {
+		const { location, wallId } = this.props.match.params;
+
+		base
+			.post(`/locations/${location}/walls/${wallId}/active`, {
+				data: this.state.boards[event.target.attributes[0].nodeValue]
+			})
+			.then((err) => {
+				console.log(err);
+			});
+	};
 
 	render() {
 		const { collectionId, location, wallId } = this.props.match.params;
@@ -45,15 +51,16 @@ class Collection extends Component {
 					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
 						{boards[currentBoard].title}
 					</Link>
+					<button onClick={this.setActiveBoard} index={currentBoard}>
+						Make Active
+					</button>
 				</div>
 			);
 		});
 
 		return (
 			<div>
-				<h2>
-					{this.state.location} - "{this.state.collectionTitle}" Collection
-				</h2>
+				<h2>"{this.state.collectionTitle}" Collection</h2>
 				<Link to={`/${location}/${wallId}/${collectionId}/form`}>Add New Board</Link>
 				<div>{boardsToRender}</div>
 			</div>

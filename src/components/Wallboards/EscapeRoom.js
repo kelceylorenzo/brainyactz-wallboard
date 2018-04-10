@@ -28,7 +28,7 @@ export default (props) => {
 					{props.leaderBoard ? (
 						<LeaderBoard leaderBoard={props.leaderBoard} />
 					) : (
-						<div>No Leader Board Information Found</div>
+						<div>Leader Board Coming Soon!</div>
 					)}
 				</div>
 			</div>
