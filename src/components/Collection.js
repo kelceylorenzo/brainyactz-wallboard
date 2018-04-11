@@ -31,10 +31,10 @@ class Collection extends Component {
 	}
 
 	setActiveBoard = (event) => {
-		const { location, wallId } = this.props.match.params;
+		const { location, wallId, collectionId } = this.props.match.params;
 
 		base.post(`/locations/${location}/walls/${wallId}/active`, {
-			data: this.state.boards[event.target.name]
+			data: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`
 		});
 	};
 

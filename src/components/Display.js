@@ -7,6 +7,7 @@ class Display extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			boardLocation: '',
 			boardInfo: {}
 		};
 	}
@@ -15,7 +16,13 @@ class Display extends Component {
 		const { location, wallId } = this.props.match.params;
 		this.ref = base.syncState(`/locations/${location}/walls/${wallId}/active`, {
 			context: this,
-			state: 'boardInfo'
+			state: 'boardLocation',
+			then: () => {
+				base.syncState(this.state.boardLocation, {
+					context: this,
+					state: 'boardInfo'
+				});
+			}
 		});
 	}
 
@@ -24,6 +31,7 @@ class Display extends Component {
 	}
 
 	render() {
+		console.log(this.state.boardInfo);
 		switch (this.state.boardInfo.type) {
 			case 'text-board':
 				return (
