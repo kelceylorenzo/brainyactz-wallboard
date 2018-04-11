@@ -31,7 +31,6 @@ class Display extends Component {
 	}
 
 	render() {
-		console.log(this.state.boardInfo);
 		switch (this.state.boardInfo.type) {
 			case 'text-board':
 				return (
