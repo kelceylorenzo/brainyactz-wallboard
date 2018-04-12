@@ -7,27 +7,27 @@ class Wall extends Component {
 		super(props);
 		this.state = {
 			collections: {},
-			collectionToAdd: '',
-			title: '',
-			location: ''
+			collectionToAdd: ''
 		};
+
+		this.location = '';
+		this.wall = '';
 	}
 
 	componentDidMount() {
 		const { location, wallId } = this.props.match.params;
+
+		base.fetch(`/locations/${location}/name`, { context: this }).then((locationName) => {
+			this.location = locationName;
+		});
+
+		base.fetch(`/locations/${location}/walls/${wallId}/name`, { context: this }).then((wallName) => {
+			this.wall = wallName;
+		});
+
 		this.ref = base.syncState(`/locations/${location}/collections`, {
 			context: this,
 			state: 'collections'
-		});
-
-		base.syncState(`/locations/${location}/walls/${wallId}/name`, {
-			context: this,
-			state: 'title'
-		});
-
-		base.syncState(`/locations/${location}/name`, {
-			context: this,
-			state: 'location'
 		});
 	}
 
@@ -81,9 +81,9 @@ class Wall extends Component {
 
 		return (
 			<div>
-				<h2>
-					{this.state.location} - {this.state.title}
-				</h2>
+				<div className="heading">
+					BrainyActz Wallboard Manager > {this.location} > {this.wall}
+				</div>
 				<form onSubmit={this.handleCollectionFormSubmit}>
 					<input
 						type="text"

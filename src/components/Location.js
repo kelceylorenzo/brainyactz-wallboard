@@ -8,20 +8,22 @@ class Location extends Component {
 		super(props);
 		this.state = {
 			walls: {},
-			wallToAdd: '',
-			title: ''
+			wallToAdd: ''
 		};
+
+		this.location = '';
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState(`/locations/${this.props.location.pathname}/walls`, {
-			context: this,
-			state: 'walls'
+		const { location } = this.props.match.params;
+
+		base.fetch(`/locations/${location}/name`, { context: this }).then((locationName) => {
+			this.location = locationName;
 		});
 
-		base.syncState(`/locations/${this.props.location.pathname}/name`, {
+		this.ref = base.syncState(`/locations/${location}/walls`, {
 			context: this,
-			state: 'title'
+			state: 'walls'
 		});
 	}
 
@@ -66,7 +68,7 @@ class Location extends Component {
 
 		return (
 			<div>
-				<h2>{this.state.title} - Wallboards</h2>
+				<div className="heading">BrainyActz Wallboard Manager > {this.location}</div>
 				<form onSubmit={this.handleWallFormSubmit}>
 					<input
 						type="text"
