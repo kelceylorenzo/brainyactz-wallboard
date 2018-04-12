@@ -42,9 +42,6 @@ class Display extends Component {
 	};
 
 	render() {
-		console.log('state: ', this.state.boardLocation);
-		console.log('tracker: ', this.currentBoard);
-
 		if (this.currentBoard && this.currentBoard !== this.state.boardLocation) {
 			this.pullNewBoard();
 		}
