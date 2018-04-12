@@ -65,6 +65,7 @@ class LandingPage extends Component {
 					key={index}
 					value={this.state.locations[currentLocation].name}
 					onClick={this.redirectToCityPage}
+					className="button"
 				>
 					{this.state.locations[currentLocation].name}
 				</button>
@@ -72,19 +73,20 @@ class LandingPage extends Component {
 		});
 
 		return (
-			<div>
-				<h2>BrainyActz Wallboards</h2>
-				{locationsToRender}
+			<div className="container">
+				<div className="heading">BrainyActz Wallboard Manager</div>
 				<form onSubmit={this.handleFormSubmit}>
 					<input
 						type="text"
 						name="add-location"
 						value={this.state.locationToAdd}
-						placeholder="Add New Location"
+						placeholder="City, ST"
 						onChange={this.handleInputChange}
+						className="input"
 					/>
-					<button>Add Location</button>
+					<button className="form button">Add Location</button>
 				</form>
+				<div className="body">{locationsToRender}</div>
 			</div>
 		);
 	}

@@ -8,21 +8,34 @@ class Collection extends Component {
 		super(props);
 		this.state = {
 			boards: {},
-			boardToAdd: '',
-			collectionTitle: ''
+			boardToAdd: ''
 		};
+
+		this.collection = '';
+		this.location = '';
+		this.wall = '';
 	}
 
 	componentDidMount() {
-		const { collectionId, location } = this.props.match.params;
+		const { location, wallId, collectionId } = this.props.match.params;
+
+		base.fetch(`/locations/${location}/name`, { context: this }).then((locationName) => {
+			this.location = locationName;
+		});
+
+		base.fetch(`/locations/${location}/walls/${wallId}/name`, { context: this }).then((wallName) => {
+			this.wall = wallName;
+		});
+
+		base
+			.fetch(`/locations/${location}/collections/${collectionId}/name`, { context: this })
+			.then((collectionName) => {
+				this.collection = collectionName;
+			});
+
 		this.ref = base.syncState(`/locations/${location}/collections/${collectionId}/boards`, {
 			context: this,
 			state: 'boards'
-		});
-
-		base.syncState(`/locations/${location}/collections/${collectionId}/name`, {
-			context: this,
-			state: 'collectionTitle'
 		});
 	}
 
@@ -57,7 +70,9 @@ class Collection extends Component {
 
 		return (
 			<div>
-				<h2>"{this.state.collectionTitle}" Collection</h2>
+				<div className="heading">
+					BrainyActz Wallboard Manager > {this.location} > {this.wall} > {this.collection}
+				</div>
 				<Link to={`/${location}/${wallId}/${collectionId}/form`}>Add New Board</Link>
 				<div>{boardsToRender}</div>
 			</div>
