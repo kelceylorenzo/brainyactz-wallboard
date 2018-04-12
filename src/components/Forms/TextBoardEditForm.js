@@ -52,7 +52,7 @@ class TextBoardEditForm extends Component {
 					rows="5"
 					onChange={this.handleInputChange}
 				/>
-				<button>Create Board</button>
+				<button>Save Changes</button>
 			</form>
 		);
 	}

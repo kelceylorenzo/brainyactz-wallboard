@@ -10,6 +10,8 @@ class Display extends Component {
 			boardLocation: '',
 			boardInfo: {}
 		};
+
+		this.currentBoard = null;
 	}
 
 	componentDidMount() {
@@ -18,6 +20,7 @@ class Display extends Component {
 			context: this,
 			state: 'boardLocation',
 			then: () => {
+				this.currentBoard = this.state.boardLocation;
 				base.syncState(this.state.boardLocation, {
 					context: this,
 					state: 'boardInfo'
@@ -30,7 +33,22 @@ class Display extends Component {
 		base.removeBinding(this.ref);
 	}
 
+	pullNewBoard = () => {
+		this.currentBoard = this.state.boardLocation;
+		base.syncState(this.state.boardLocation, {
+			context: this,
+			state: 'boardInfo'
+		});
+	};
+
 	render() {
+		console.log('state: ', this.state.boardLocation);
+		console.log('tracker: ', this.currentBoard);
+
+		if (this.currentBoard && this.currentBoard !== this.state.boardLocation) {
+			this.pullNewBoard();
+		}
+
 		switch (this.state.boardInfo.type) {
 			case 'text-board':
 				return (
