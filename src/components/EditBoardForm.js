@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import base from '../base';
 import TextBoardEditForm from './Forms/TextBoardEditForm';
+import EscapeRoomEditForm from './Forms/EscapeRoomEditForm';
 
 class EditBoardForm extends Component {
 	constructor(props) {
@@ -40,7 +41,12 @@ class EditBoardForm extends Component {
 					</div>
 				);
 			case 'escape-room':
-				return <div>escape room edit form</div>;
+				return (
+					<div>
+						<EscapeRoomEditForm data={this.state.originalBoardData} saveChanges={this.saveChanges} />
+						<div>{this.state.feedback}</div>
+					</div>
+				);
 			default:
 				return <div>loading ... </div>;
 		}
