@@ -3,19 +3,29 @@ import base from '../base';
 import TextBoard from './Wallboards/TextBoard';
 import EscapeRoom from './Wallboards/EscapeRoom';
 
-class Board extends Component {
+class Display extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			boardLocation: '',
 			boardInfo: {}
 		};
+
+		this.currentBoard = null;
 	}
 
 	componentDidMount() {
-		const { location, collectionId, boardId } = this.props.match.params;
-		this.ref = base.syncState(`/locations/${location}/collections/${collectionId}/boards/${boardId}`, {
+		const { location, wallId } = this.props.match.params;
+		this.ref = base.syncState(`/locations/${location}/walls/${wallId}/active`, {
 			context: this,
-			state: 'boardInfo'
+			state: 'boardLocation',
+			then: () => {
+				this.currentBoard = this.state.boardLocation;
+				base.syncState(this.state.boardLocation, {
+					context: this,
+					state: 'boardInfo'
+				});
+			}
 		});
 	}
 
@@ -23,7 +33,22 @@ class Board extends Component {
 		base.removeBinding(this.ref);
 	}
 
+	pullNewBoard = () => {
+		this.currentBoard = this.state.boardLocation;
+		base.syncState(this.state.boardLocation, {
+			context: this,
+			state: 'boardInfo'
+		});
+	};
+
 	render() {
+		console.log('state: ', this.state.boardLocation);
+		console.log('tracker: ', this.currentBoard);
+
+		if (this.currentBoard && this.currentBoard !== this.state.boardLocation) {
+			this.pullNewBoard();
+		}
+
 		switch (this.state.boardInfo.type) {
 			case 'text-board':
 				return (
@@ -49,4 +74,4 @@ class Board extends Component {
 	}
 }
 
-export default Board;
+export default Display;

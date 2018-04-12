@@ -1,4 +1,5 @@
 import React from 'react';
+import LeaderBoard from './LeaderBoard';
 
 export default (props) => {
 	let style = {
@@ -19,11 +20,17 @@ export default (props) => {
 						src={`https://www.youtube.com/embed/${
 							props.videoId
 						}?autoplay=1&loop=1&rel=0&showinfo=0&color=white&playlist=${props.videoId}`}
-						frameborder="0"
-						allowfullscreen
+						frameBorder="0"
+						allowFullScreen
 					/>
 				</div>
-				<div className="page-content escape-room">Leaderboard</div>
+				<div className="page-content escape-room">
+					{props.leaderBoard ? (
+						<LeaderBoard leaderBoard={props.leaderBoard} />
+					) : (
+						<div>Leader Board Coming Soon!</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);

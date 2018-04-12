@@ -8,8 +8,21 @@ class NewBoardForm extends Component {
 		super(props);
 		this.state = {
 			formType: '',
-			feedback: ''
+			feedback: '',
+			boardData: {}
 		};
+	}
+
+	componentDidMount() {
+		const { location, collectionId } = this.props.match.params;
+		this.ref = base.syncState(`/locations/${location}/collections/${collectionId}/boards/${Date.now()}`, {
+			context: this,
+			state: 'boardData'
+		});
+	}
+
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
 	}
 
 	changeFormType = (event) => {
@@ -18,24 +31,11 @@ class NewBoardForm extends Component {
 		});
 	};
 
-	submitForm = (boardData) => {
-		const { collectionId, location } = this.props.match.params;
-		this.ref = base
-			.push(`/locations/${location}/collections/${collectionId}/boards`, {
-				data: boardData
-			})
-			.then(() => {
-				this.setState({
-					feedback: 'Board Created!'
-				});
-				return;
-			})
-			.catch(() => {
-				this.setState({
-					feedback: 'There was an issue creating your board; please try again.'
-				});
-				return;
-			});
+	submitForm = (formData) => {
+		this.setState({
+			boardData: formData,
+			feedback: 'Board Created!'
+		});
 	};
 
 	render() {
