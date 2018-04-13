@@ -65,7 +65,7 @@ class LandingPage extends Component {
 					key={index}
 					value={this.state.locations[currentLocation].name}
 					onClick={this.redirectToCityPage}
-					className="button"
+					className="selection"
 				>
 					{this.state.locations[currentLocation].name}
 				</button>

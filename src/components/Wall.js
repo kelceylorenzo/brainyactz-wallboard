@@ -73,6 +73,7 @@ class Wall extends Component {
 					key={index}
 					name={this.state.collections[currentCollection].name}
 					onClick={() => this.redirectToCollectionPage(currentCollection)}
+					className="selection"
 				>
 					{this.state.collections[currentCollection].name}
 				</button>
@@ -96,7 +97,9 @@ class Wall extends Component {
 				</form>
 				{collectionsToRender}
 
-				<Link to={`${this.props.match.url}/display`}>Display</Link>
+				<Link className="selection" to={`${this.props.match.url}/display`}>
+					Display
+				</Link>
 			</div>
 		);
 	}

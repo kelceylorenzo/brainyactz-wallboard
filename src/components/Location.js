@@ -60,7 +60,7 @@ class Location extends Component {
 	render() {
 		let wallsToRender = Object.keys(this.state.walls).map((currentWall, index) => {
 			return (
-				<Link key={index} to={`${this.props.match.params.location}/${currentWall}`}>
+				<Link className="selection" key={index} to={`${this.props.match.params.location}/${currentWall}`}>
 					{this.state.walls[currentWall].name}
 				</Link>
 			);
