@@ -57,11 +57,14 @@ class Collection extends Component {
 		let boardsToRender = Object.keys(boards).map((currentBoard, index) => {
 			return (
 				<div key={index}>
-					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
-						{boards[currentBoard].title}
+					{boards[currentBoard].title}
+					<Link className="selection" to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
+						Preview
 					</Link>
-					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}>Edit Board</Link>
-					<button onClick={this.setActiveBoard} name={currentBoard}>
+					<Link className="selection" to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}>
+						Edit Board
+					</Link>
+					<button className="selection" onClick={this.setActiveBoard} name={currentBoard}>
 						Make Active
 					</button>
 				</div>
@@ -73,7 +76,9 @@ class Collection extends Component {
 				<div className="heading">
 					BrainyActz Wallboard Manager > {this.location} > {this.wall} > {this.collection}
 				</div>
-				<Link to={`/${location}/${wallId}/${collectionId}/form`}>Add New Board</Link>
+				<Link className="button" to={`/${location}/${wallId}/${collectionId}/form`}>
+					Add New Board
+				</Link>
 				<div>{boardsToRender}</div>
 			</div>
 		);

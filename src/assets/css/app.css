@@ -33,7 +33,8 @@ input:focus {
 	border-bottom: 3px solid #d3f707;
 }
 
-button {
+button,
+.button {
 	padding: 15px;
 	margin: 0 15px;
 	border: 2px solid transparent;
@@ -45,14 +46,38 @@ button {
 	cursor: pointer;
 }
 
-button:focus {
+button:focus,
+.button:focus {
 	outline: 0;
 }
 
-button:hover {
+button:hover,
+.button:hover {
 	background-color: white;
 	border: 2px solid #9e9e9e;
 	color: #9e9e9e;
+}
+
+.selection {
+	padding: 15px;
+	margin: 0 15px;
+	border: 2px solid #9e9e9e;
+	background-color: white;
+	color: #9e9e9e;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	cursor: pointer;
+}
+
+.selection:focus {
+	outline: 0;
+}
+
+.selection:hover {
+	background-color: #9e9e9e;
+	border: 2px solid #9e9e9e;
+	color: white;
 }
 
 .heading {
