@@ -91,11 +91,11 @@ class EscapeRoomForm extends Component {
 						<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
 					) : (
 						[
-							<button key="create" type="submit">
-								Create Board
-							</button>,
 							<button key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
 								Add LeaderBoard
+							</button>,
+							<button key="create" type="submit">
+								Create Board
 							</button>
 						]
 					)}

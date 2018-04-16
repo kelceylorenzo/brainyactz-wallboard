@@ -74,7 +74,7 @@ class Location extends Component {
 						type="text"
 						name="add-wall"
 						value={this.state.wallToAdd}
-						placeholder="Add New Wall"
+						placeholder="Wall Title"
 						onChange={this.handleWallInputChange}
 					/>
 					<button>Add Wall</button>
