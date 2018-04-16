@@ -56,7 +56,7 @@ class Collection extends Component {
 		const { boards } = this.state;
 		let boardsToRender = Object.keys(boards).map((currentBoard, index) => {
 			return (
-				<div key={index}>
+				<div className="board-listing" key={index}>
 					{boards[currentBoard].title}
 					<Link className="selection" to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
 						Preview
@@ -76,10 +76,12 @@ class Collection extends Component {
 				<div className="heading">
 					BrainyActz Wallboard Manager > {this.location} > {this.wall} > {this.collection}
 				</div>
-				<Link className="button" to={`/${location}/${wallId}/${collectionId}/form`}>
-					Add New Board
-				</Link>
-				<div>{boardsToRender}</div>
+				<div className="subheading">
+					<Link className="button" to={`/${location}/${wallId}/${collectionId}/form`}>
+						Add New Board
+					</Link>
+				</div>
+				<div className="boards">{boardsToRender}</div>
 			</div>
 		);
 	}

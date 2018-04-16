@@ -90,7 +90,7 @@ class Wall extends Component {
 						type="text"
 						name="add-collection"
 						value={this.state.collectionToAdd}
-						placeholder="Add New Collection"
+						placeholder="Collection Title"
 						onChange={this.handleCollectionInputChange}
 					/>
 					<button>Add Collection</button>
