@@ -72,7 +72,7 @@ class EscapeRoomForm extends Component {
 				/>
 				<label>Background Image</label>
 				<input
-					type="url"
+					type="text"
 					name="backgroundImage"
 					value={this.state.backgroundImage}
 					placeholder="Background Image URL"
@@ -80,7 +80,7 @@ class EscapeRoomForm extends Component {
 				/>
 				<label>Video</label>
 				<input
-					type="url"
+					type="text"
 					name="video"
 					value={this.state.video}
 					placeholder="Video URL"
@@ -90,10 +90,10 @@ class EscapeRoomForm extends Component {
 					<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
 				) : (
 					[
-						<button key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
+						<button className="active" key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
 							Add LeaderBoard
 						</button>,
-						<button key="create" type="submit">
+						<button className="confirm" key="create" type="submit">
 							Create Board
 						</button>
 					]
