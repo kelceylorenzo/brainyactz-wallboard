@@ -83,8 +83,8 @@ class EscapeRoomEditForm extends Component {
 					) : (
 						''
 					)}
-					<button>Save Changes</button>
-					<button type="button" onClick={this.props.goBack}>
+					<button className="confirm">Save Changes</button>
+					<button type="cancel" onClick={this.props.goBack}>
 						Cancel
 					</button>
 				</form>
