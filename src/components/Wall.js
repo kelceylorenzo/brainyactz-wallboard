@@ -103,11 +103,10 @@ class Wall extends Component {
 					/>
 					<button className="confirm">Add Collection</button>
 				</form>
-				{collectionsToRender}
-
-				<Link className="selection" to={`${this.props.match.url}/display`}>
+				<Link className="selection active" to={`${this.props.match.url}/display`}>
 					Display
 				</Link>
+				{collectionsToRender}
 			</div>
 		);
 	}
