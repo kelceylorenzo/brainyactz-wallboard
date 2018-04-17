@@ -48,10 +48,20 @@ class NewBoardForm extends Component {
 
 				<form className="new-board">
 					<label>Select Board Type</label>
-					<button name="form-type" value="text-board" onClick={this.changeFormType}>
+					<button
+						className="form selection"
+						name="form-type"
+						value="text-board"
+						onClick={this.changeFormType}
+					>
 						Text Board
 					</button>
-					<button name="form-type" value="escape-room" onClick={this.changeFormType}>
+					<button
+						className="form selection"
+						name="form-type"
+						value="escape-room"
+						onClick={this.changeFormType}
+					>
 						Escape Room
 					</button>
 				</form>

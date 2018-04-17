@@ -84,7 +84,7 @@ class LandingPage extends Component {
 						onChange={this.handleInputChange}
 						className="input"
 					/>
-					<button className="form button">Add Location</button>
+					<button className="confirm">Add Location</button>
 				</form>
 				<div className="body">{locationsToRender}</div>
 			</div>

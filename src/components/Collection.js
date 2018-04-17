@@ -61,10 +61,13 @@ class Collection extends Component {
 					<Link className="selection" to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
 						Preview
 					</Link>
-					<Link className="selection" to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}>
+					<Link
+						className="selection edit"
+						to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}
+					>
 						Edit Board
 					</Link>
-					<button className="selection" onClick={this.setActiveBoard} name={currentBoard}>
+					<button className="selection active" onClick={this.setActiveBoard} name={currentBoard}>
 						Make Active
 					</button>
 				</div>
@@ -74,10 +77,21 @@ class Collection extends Component {
 		return (
 			<div>
 				<div className="heading">
-					BrainyActz Wallboard Manager > {this.location} > {this.wall} > {this.collection}
+					<Link className="header-link" to="/">
+						BrainyActz Wallboard Manager
+					</Link>
+					>
+					<Link className="header-link" to={`/${location}`}>
+						{this.location}
+					</Link>
+					>
+					<Link className="header-link" to={`/${location}/${wallId}`}>
+						{this.wall}
+					</Link>
+					> {this.collection}
 				</div>
 				<div className="subheading">
-					<Link className="button" to={`/${location}/${wallId}/${collectionId}/form`}>
+					<Link className="button confirm" to={`/${location}/${wallId}/${collectionId}/form`}>
 						Add New Board
 					</Link>
 				</div>

@@ -68,7 +68,12 @@ class Location extends Component {
 
 		return (
 			<div>
-				<div className="heading">BrainyActz Wallboard Manager > {this.location}</div>
+				<div className="heading">
+					<Link className="header-link" to="/">
+						BrainyActz Wallboard Manager
+					</Link>
+					> {this.location}
+				</div>
 				<form onSubmit={this.handleWallFormSubmit}>
 					<input
 						type="text"
@@ -77,7 +82,7 @@ class Location extends Component {
 						placeholder="Wall Title"
 						onChange={this.handleWallInputChange}
 					/>
-					<button>Add Wall</button>
+					<button className="confirm">Add Wall</button>
 				</form>
 				{wallsToRender}
 			</div>

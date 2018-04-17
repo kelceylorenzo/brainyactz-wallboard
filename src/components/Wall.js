@@ -67,6 +67,7 @@ class Wall extends Component {
 	};
 
 	render() {
+		const { location } = this.props.match.params;
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
 				<button
@@ -83,7 +84,14 @@ class Wall extends Component {
 		return (
 			<div>
 				<div className="heading">
-					BrainyActz Wallboard Manager > {this.location} > {this.wall}
+					<Link className="header-link" to="/">
+						BrainyActz Wallboard Manager
+					</Link>
+					>
+					<Link className="header-link" to={`/${location}`}>
+						{this.location}
+					</Link>
+					> {this.wall}
 				</div>
 				<form onSubmit={this.handleCollectionFormSubmit}>
 					<input
@@ -93,7 +101,7 @@ class Wall extends Component {
 						placeholder="Collection Title"
 						onChange={this.handleCollectionInputChange}
 					/>
-					<button>Add Collection</button>
+					<button className="confirm">Add Collection</button>
 				</form>
 				{collectionsToRender}
 

@@ -39,7 +39,6 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	render() {
-		console.log(this.props.history);
 		return (
 			<div>
 				<form className="edit-board" onSubmit={this.handleFormSubmit}>
