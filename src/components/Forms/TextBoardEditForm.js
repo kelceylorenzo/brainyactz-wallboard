@@ -52,8 +52,10 @@ class TextBoardEditForm extends Component {
 					rows="5"
 					onChange={this.handleInputChange}
 				/>
-				<button type="submit">Save Changes</button>
-				<button type="button" onClick={this.props.goBack}>
+				<button className="confirm" type="submit">
+					Save Changes
+				</button>
+				<button className="cancel" type="button" onClick={this.props.goBack}>
 					Cancel
 				</button>
 			</form>
