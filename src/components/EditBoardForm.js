@@ -36,15 +36,32 @@ class EditBoardForm extends Component {
 			case 'text-board':
 				return (
 					<div>
-						<TextBoardEditForm data={this.state.originalBoardData} saveChanges={this.saveChanges} />
-						<button onClick={this.props.history.goBack}>Cancel</button>
+						<div className="subheading">
+							<button type="button" onClick={this.props.history.goBack}>
+								←
+							</button>
+						</div>
+						<TextBoardEditForm
+							data={this.state.originalBoardData}
+							saveChanges={this.saveChanges}
+							goBack={this.props.history.goBack}
+						/>
 						<div>{this.state.feedback}</div>
 					</div>
 				);
 			case 'escape-room':
 				return (
 					<div>
-						<EscapeRoomEditForm data={this.state.originalBoardData} saveChanges={this.saveChanges} />
+						<div className="subheading">
+							<button type="button" onClick={this.props.history.goBack}>
+								←
+							</button>
+						</div>
+						<EscapeRoomEditForm
+							data={this.state.originalBoardData}
+							saveChanges={this.saveChanges}
+							goBack={this.props.history.goBack}
+						/>
 						<div>{this.state.feedback}</div>
 					</div>
 				);

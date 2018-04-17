@@ -39,6 +39,7 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	render() {
+		console.log(this.props.history);
 		return (
 			<div>
 				<form className="edit-board" onSubmit={this.handleFormSubmit}>
@@ -81,8 +82,12 @@ class EscapeRoomEditForm extends Component {
 							submitForm={this.handleFormSubmit}
 						/>
 					) : (
-						<button>Save Changes</button>
+						''
 					)}
+					<button>Save Changes</button>
+					<button type="button" onClick={this.props.goBack}>
+						Cancel
+					</button>
 				</form>
 			</div>
 		);

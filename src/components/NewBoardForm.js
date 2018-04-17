@@ -43,7 +43,7 @@ class NewBoardForm extends Component {
 		return (
 			<div>
 				<div className="subheading">
-					<button onClick={this.props.history.goBack}>Back</button>
+					<button onClick={this.props.history.goBack}>←</button>
 				</div>
 
 				<form className="new-board">
