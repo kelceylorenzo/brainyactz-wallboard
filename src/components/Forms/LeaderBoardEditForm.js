@@ -74,7 +74,6 @@ class LeaderBoardEditForm extends Component {
 		return (
 			<div>
 				<h4>First Place Team</h4>
-				<label>Team Name</label>
 				<input
 					type="text"
 					placeholder="Enter Name"
@@ -82,7 +81,6 @@ class LeaderBoardEditForm extends Component {
 					name="team"
 					onChange={this.handleFirstInputChange}
 				/>
-				<label>Time Completed In</label>
 				<input
 					type="text"
 					placeholder="Enter Time"
@@ -90,7 +88,6 @@ class LeaderBoardEditForm extends Component {
 					name="time"
 					onChange={this.handleFirstInputChange}
 				/>
-				<label>Date Completed</label>
 				<input
 					type="text"
 					placeholder="Enter Date"
@@ -99,7 +96,6 @@ class LeaderBoardEditForm extends Component {
 					onChange={this.handleFirstInputChange}
 				/>
 				<h4>Second Place Team</h4>
-				<label>Team Name</label>
 				<input
 					type="text"
 					placeholder="Enter Name"
@@ -107,7 +103,6 @@ class LeaderBoardEditForm extends Component {
 					name="team"
 					onChange={this.handleSecondInputChange}
 				/>
-				<label>Time Completed In</label>
 				<input
 					type="text"
 					placeholder="Enter Time"
@@ -115,7 +110,6 @@ class LeaderBoardEditForm extends Component {
 					name="time"
 					onChange={this.handleSecondInputChange}
 				/>
-				<label>Date Completed</label>
 				<input
 					type="text"
 					type="text"
@@ -125,7 +119,6 @@ class LeaderBoardEditForm extends Component {
 					onChange={this.handleSecondInputChange}
 				/>
 				<h4>Third Place Team</h4>
-				<label>Team Name</label>
 				<input
 					type="text"
 					placeholder="Enter Name"
@@ -133,7 +126,6 @@ class LeaderBoardEditForm extends Component {
 					name="team"
 					onChange={this.handleThirdInputChange}
 				/>
-				<label>Time Completed In</label>
 				<input
 					type="text"
 					placeholder="Enter Time"
@@ -141,7 +133,6 @@ class LeaderBoardEditForm extends Component {
 					name="time"
 					onChange={this.handleThirdInputChange}
 				/>
-				<label>Date Completed</label>
 				<input
 					type="text"
 					type="text"
@@ -151,7 +142,6 @@ class LeaderBoardEditForm extends Component {
 					onChange={this.handleThirdInputChange}
 				/>
 				<h4>Fourth Place Team</h4>
-				<label>Team Name</label>
 				<input
 					type="text"
 					placeholder="Enter Name"
@@ -159,7 +149,6 @@ class LeaderBoardEditForm extends Component {
 					name="team"
 					onChange={this.handleFourthInputChange}
 				/>
-				<label>Time Completed In</label>
 				<input
 					type="text"
 					placeholder="Enter Time"
@@ -167,7 +156,6 @@ class LeaderBoardEditForm extends Component {
 					name="time"
 					onChange={this.handleFourthInputChange}
 				/>
-				<label>Date Completed</label>
 				<input
 					type="text"
 					type="text"
@@ -177,7 +165,6 @@ class LeaderBoardEditForm extends Component {
 					onChange={this.handleFourthInputChange}
 				/>
 				<h4>Fifth Place Team</h4>
-				<label>Team Name</label>
 				<input
 					type="text"
 					placeholder="Enter Name"
@@ -185,7 +172,6 @@ class LeaderBoardEditForm extends Component {
 					name="team"
 					onChange={this.handleFifthInputChange}
 				/>
-				<label>Time Completed In</label>
 				<input
 					type="text"
 					placeholder="Enter Time"
@@ -193,7 +179,6 @@ class LeaderBoardEditForm extends Component {
 					name="time"
 					onChange={this.handleFifthInputChange}
 				/>
-				<label>Date Completed</label>
 				<input
 					type="text"
 					type="text"
@@ -202,7 +187,6 @@ class LeaderBoardEditForm extends Component {
 					name="date"
 					onChange={this.handleFifthInputChange}
 				/>
-				<button onClick={this.saveLeaderBoard}>Save Changes</button>
 			</div>
 		);
 	}

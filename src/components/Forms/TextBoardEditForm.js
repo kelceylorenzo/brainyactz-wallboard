@@ -24,7 +24,7 @@ class TextBoardEditForm extends Component {
 
 	render() {
 		return (
-			<form onSubmit={this.handleFormSubmit}>
+			<form className="edit-board" onSubmit={this.handleFormSubmit}>
 				<label>Title/Name:</label>
 				<input
 					type="text"
@@ -52,7 +52,10 @@ class TextBoardEditForm extends Component {
 					rows="5"
 					onChange={this.handleInputChange}
 				/>
-				<button>Save Changes</button>
+				<button type="submit">Save Changes</button>
+				<button type="button" onClick={this.props.goBack}>
+					Cancel
+				</button>
 			</form>
 		);
 	}
