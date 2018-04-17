@@ -46,8 +46,8 @@ class NewBoardForm extends Component {
 					<button onClick={this.props.history.goBack}>Back</button>
 				</div>
 
-				<form>
-					<label>Board Type</label>
+				<form className="new-board">
+					<label>Select Board Type</label>
 					<button name="form-type" value="text-board" onClick={this.changeFormType}>
 						Text Board
 					</button>

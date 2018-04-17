@@ -37,6 +37,7 @@ class EditBoardForm extends Component {
 				return (
 					<div>
 						<TextBoardEditForm data={this.state.originalBoardData} saveChanges={this.saveChanges} />
+						<button onClick={this.props.history.goBack}>Cancel</button>
 						<div>{this.state.feedback}</div>
 					</div>
 				);

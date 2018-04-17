@@ -41,7 +41,7 @@ class EscapeRoomEditForm extends Component {
 	render() {
 		return (
 			<div>
-				<form onSubmit={this.handleFormSubmit}>
+				<form className="edit-board" onSubmit={this.handleFormSubmit}>
 					<label>Title/Name</label>
 					<input
 						type="text"
@@ -81,7 +81,6 @@ class EscapeRoomEditForm extends Component {
 							submitForm={this.handleFormSubmit}
 						/>
 					) : (
-						// <div>leaderBoard edit form</div>
 						<button>Save Changes</button>
 					)}
 				</form>
