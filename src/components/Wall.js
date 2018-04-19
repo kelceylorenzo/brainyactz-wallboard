@@ -61,23 +61,13 @@ class Wall extends Component {
 		});
 	};
 
-	redirectToCollectionPage = (collectionId) => {
-		const { location, wallId } = this.props.match.params;
-		this.props.history.push(`/${location}/${wallId}/${collectionId}`);
-	};
-
 	render() {
-		const { location } = this.props.match.params;
+		const { location, wallId } = this.props.match.params;
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
-				<button
-					key={index}
-					name={this.state.collections[currentCollection].name}
-					onClick={() => this.redirectToCollectionPage(currentCollection)}
-					className="selection"
-				>
+				<Link key={index} to={`/${location}/${wallId}/${currentCollection}`} className="selection">
 					{this.state.collections[currentCollection].name}
-				</button>
+				</Link>
 			);
 		});
 
