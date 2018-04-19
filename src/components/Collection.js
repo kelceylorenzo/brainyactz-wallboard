@@ -8,21 +8,34 @@ class Collection extends Component {
 		super(props);
 		this.state = {
 			boards: {},
-			boardToAdd: '',
-			collectionTitle: ''
+			boardToAdd: ''
 		};
+
+		this.collection = '';
+		this.location = '';
+		this.wall = '';
 	}
 
 	componentDidMount() {
-		const { collectionId, location } = this.props.match.params;
+		const { location, wallId, collectionId } = this.props.match.params;
+
+		base.fetch(`/locations/${location}/name`, { context: this }).then((locationName) => {
+			this.location = locationName;
+		});
+
+		base.fetch(`/locations/${location}/walls/${wallId}/name`, { context: this }).then((wallName) => {
+			this.wall = wallName;
+		});
+
+		base
+			.fetch(`/locations/${location}/collections/${collectionId}/name`, { context: this })
+			.then((collectionName) => {
+				this.collection = collectionName;
+			});
+
 		this.ref = base.syncState(`/locations/${location}/collections/${collectionId}/boards`, {
 			context: this,
 			state: 'boards'
-		});
-
-		base.syncState(`/locations/${location}/collections/${collectionId}/name`, {
-			context: this,
-			state: 'collectionTitle'
 		});
 	}
 
@@ -43,12 +56,18 @@ class Collection extends Component {
 		const { boards } = this.state;
 		let boardsToRender = Object.keys(boards).map((currentBoard, index) => {
 			return (
-				<div key={index}>
-					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
-						{boards[currentBoard].title}
+				<div className="board-listing" key={index}>
+					{boards[currentBoard].title}
+					<Link className="selection" to={`/${location}/${wallId}/${collectionId}/${currentBoard}`}>
+						Preview
 					</Link>
-					<Link to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}>Edit Board</Link>
-					<button onClick={this.setActiveBoard} name={currentBoard}>
+					<Link
+						className="selection edit"
+						to={`/${location}/${wallId}/${collectionId}/${currentBoard}/edit`}
+					>
+						Edit Board
+					</Link>
+					<button className="selection active" onClick={this.setActiveBoard} name={currentBoard}>
 						Make Active
 					</button>
 				</div>
@@ -57,9 +76,26 @@ class Collection extends Component {
 
 		return (
 			<div>
-				<h2>"{this.state.collectionTitle}" Collection</h2>
-				<Link to={`/${location}/${wallId}/${collectionId}/form`}>Add New Board</Link>
-				<div>{boardsToRender}</div>
+				<div className="heading">
+					<Link className="header-link" to="/">
+						BrainyActz Wallboard Manager
+					</Link>
+					>
+					<Link className="header-link" to={`/${location}`}>
+						{this.location}
+					</Link>
+					>
+					<Link className="header-link" to={`/${location}/${wallId}`}>
+						{this.wall}
+					</Link>
+					> {this.collection}
+				</div>
+				<div className="subheading">
+					<Link className="button confirm" to={`/${location}/${wallId}/${collectionId}/form`}>
+						Add New Board
+					</Link>
+				</div>
+				<div className="boards">{boardsToRender}</div>
 			</div>
 		);
 	}

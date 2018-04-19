@@ -7,27 +7,27 @@ class Wall extends Component {
 		super(props);
 		this.state = {
 			collections: {},
-			collectionToAdd: '',
-			title: '',
-			location: ''
+			collectionToAdd: ''
 		};
+
+		this.location = '';
+		this.wall = '';
 	}
 
 	componentDidMount() {
 		const { location, wallId } = this.props.match.params;
+
+		base.fetch(`/locations/${location}/name`, { context: this }).then((locationName) => {
+			this.location = locationName;
+		});
+
+		base.fetch(`/locations/${location}/walls/${wallId}/name`, { context: this }).then((wallName) => {
+			this.wall = wallName;
+		});
+
 		this.ref = base.syncState(`/locations/${location}/collections`, {
 			context: this,
 			state: 'collections'
-		});
-
-		base.syncState(`/locations/${location}/walls/${wallId}/name`, {
-			context: this,
-			state: 'title'
-		});
-
-		base.syncState(`/locations/${location}/name`, {
-			context: this,
-			state: 'location'
 		});
 	}
 
@@ -61,42 +61,42 @@ class Wall extends Component {
 		});
 	};
 
-	redirectToCollectionPage = (collectionId) => {
-		const { location, wallId } = this.props.match.params;
-		this.props.history.push(`/${location}/${wallId}/${collectionId}`);
-	};
-
 	render() {
+		const { location, wallId } = this.props.match.params;
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
-				<button
-					key={index}
-					name={this.state.collections[currentCollection].name}
-					onClick={() => this.redirectToCollectionPage(currentCollection)}
-				>
+				<Link key={index} to={`/${location}/${wallId}/${currentCollection}`} className="selection">
 					{this.state.collections[currentCollection].name}
-				</button>
+				</Link>
 			);
 		});
 
 		return (
 			<div>
-				<h2>
-					{this.state.location} - {this.state.title}
-				</h2>
+				<div className="heading">
+					<Link className="header-link" to="/">
+						BrainyActz Wallboard Manager
+					</Link>
+					>
+					<Link className="header-link" to={`/${location}`}>
+						{this.location}
+					</Link>
+					> {this.wall}
+				</div>
 				<form onSubmit={this.handleCollectionFormSubmit}>
 					<input
 						type="text"
 						name="add-collection"
 						value={this.state.collectionToAdd}
-						placeholder="Add New Collection"
+						placeholder="Collection Title"
 						onChange={this.handleCollectionInputChange}
 					/>
-					<button>Add Collection</button>
+					<button className="confirm">Add Collection</button>
 				</form>
+				<Link className="selection active" to={`${this.props.match.url}/display`}>
+					Display
+				</Link>
 				{collectionsToRender}
-
-				<Link to={`${this.props.match.url}/display`}>Display</Link>
 			</div>
 		);
 	}

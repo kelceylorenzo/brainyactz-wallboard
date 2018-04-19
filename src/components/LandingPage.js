@@ -19,6 +19,10 @@ class LandingPage extends Component {
 		});
 	}
 
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
+	}
+
 	handleInputChange = (event) => {
 		this.setState({
 			locationToAdd: event.target.value
@@ -65,6 +69,7 @@ class LandingPage extends Component {
 					key={index}
 					value={this.state.locations[currentLocation].name}
 					onClick={this.redirectToCityPage}
+					className="selection"
 				>
 					{this.state.locations[currentLocation].name}
 				</button>
@@ -72,19 +77,20 @@ class LandingPage extends Component {
 		});
 
 		return (
-			<div>
-				<h2>BrainyActz Wallboards</h2>
-				{locationsToRender}
+			<div className="container">
+				<div className="heading">BrainyActz Wallboard Manager</div>
 				<form onSubmit={this.handleFormSubmit}>
 					<input
 						type="text"
 						name="add-location"
 						value={this.state.locationToAdd}
-						placeholder="Add New Location"
+						placeholder="City, ST"
 						onChange={this.handleInputChange}
+						className="input"
 					/>
-					<button>Add Location</button>
+					<button className="confirm">Add Location</button>
 				</form>
+				<div className="body">{locationsToRender}</div>
 			</div>
 		);
 	}

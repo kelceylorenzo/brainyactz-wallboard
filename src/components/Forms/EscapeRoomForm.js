@@ -53,54 +53,52 @@ class EscapeRoomForm extends Component {
 
 	render() {
 		return (
-			<div>
-				<form onSubmit={this.handleFormSubmit}>
-					<label>Title/Name</label>
-					<input
-						type="text"
-						name="title"
-						value={this.state.title}
-						placeholder="Title/Name"
-						onChange={this.handleInputChange}
-					/>
-					<label>Subtitle</label>
-					<input
-						type="text"
-						name="subtitle"
-						value={this.state.subtitle}
-						placeholder="Subtitle"
-						onChange={this.handleInputChange}
-					/>
-					<label>Background Image</label>
-					<input
-						type="url"
-						name="backgroundImage"
-						value={this.state.backgroundImage}
-						placeholder="Background Image URL"
-						onChange={this.handleInputChange}
-					/>
-					<label>Video</label>
-					<input
-						type="url"
-						name="video"
-						value={this.state.video}
-						placeholder="Video URL"
-						onChange={this.handleInputChange}
-					/>
-					{this.state.leaderBoardStatus ? (
-						<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
-					) : (
-						[
-							<button key="create" type="submit">
-								Create Board
-							</button>,
-							<button key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
-								Add LeaderBoard
-							</button>
-						]
-					)}
-				</form>
-			</div>
+			<form className="new-board" onSubmit={this.handleFormSubmit}>
+				<label>Title/Name</label>
+				<input
+					type="text"
+					name="title"
+					value={this.state.title}
+					placeholder="Title/Name"
+					onChange={this.handleInputChange}
+				/>
+				<label>Subtitle</label>
+				<input
+					type="text"
+					name="subtitle"
+					value={this.state.subtitle}
+					placeholder="Subtitle"
+					onChange={this.handleInputChange}
+				/>
+				<label>Background Image</label>
+				<input
+					type="text"
+					name="backgroundImage"
+					value={this.state.backgroundImage}
+					placeholder="Background Image URL"
+					onChange={this.handleInputChange}
+				/>
+				<label>Video</label>
+				<input
+					type="text"
+					name="video"
+					value={this.state.video}
+					placeholder="Video URL"
+					onChange={this.handleInputChange}
+				/>
+				{this.state.leaderBoardStatus ? (
+					<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
+				) : (
+					[
+						<button className="active" key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
+							Add LeaderBoard
+						</button>,
+						<button className="confirm" key="create" type="submit">
+							Create Board
+						</button>
+					]
+				)}
+			</form>
 		);
 	}
 }

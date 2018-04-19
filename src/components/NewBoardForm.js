@@ -26,6 +26,7 @@ class NewBoardForm extends Component {
 	}
 
 	changeFormType = (event) => {
+		event.preventDefault();
 		this.setState({
 			formType: event.target.value
 		});
@@ -41,12 +42,28 @@ class NewBoardForm extends Component {
 	render() {
 		return (
 			<div>
-				<button onClick={this.props.history.goBack}>Back</button>
-				<form>
-					<input type="radio" name="form-type" value="text-board" onChange={this.changeFormType} />
-					<label>Text Board</label>
-					<input type="radio" name="form-type" value="escape-room" onChange={this.changeFormType} />
-					<label>Escape Room</label>
+				<div className="subheading">
+					<button onClick={this.props.history.goBack}>←</button>
+				</div>
+
+				<form className="new-board">
+					<label>Select Board Type</label>
+					<button
+						className="form selection"
+						name="form-type"
+						value="text-board"
+						onClick={this.changeFormType}
+					>
+						Text Board
+					</button>
+					<button
+						className="form selection"
+						name="form-type"
+						value="escape-room"
+						onClick={this.changeFormType}
+					>
+						Escape Room
+					</button>
 				</form>
 
 				{this.state.formType === 'text-board' ? (

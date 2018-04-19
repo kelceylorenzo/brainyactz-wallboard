@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import base from '../base';
 import TextBoardEditForm from './Forms/TextBoardEditForm';
+import EscapeRoomEditForm from './Forms/EscapeRoomEditForm';
 
 class EditBoardForm extends Component {
 	constructor(props) {
@@ -35,12 +36,35 @@ class EditBoardForm extends Component {
 			case 'text-board':
 				return (
 					<div>
-						<TextBoardEditForm data={this.state.originalBoardData} saveChanges={this.saveChanges} />
+						<div className="subheading">
+							<button type="button" onClick={this.props.history.goBack}>
+								←
+							</button>
+						</div>
+						<TextBoardEditForm
+							data={this.state.originalBoardData}
+							saveChanges={this.saveChanges}
+							goBack={this.props.history.goBack}
+						/>
 						<div>{this.state.feedback}</div>
 					</div>
 				);
 			case 'escape-room':
-				return <div>escape room edit form</div>;
+				return (
+					<div>
+						<div className="subheading">
+							<button type="button" onClick={this.props.history.goBack}>
+								←
+							</button>
+						</div>
+						<EscapeRoomEditForm
+							data={this.state.originalBoardData}
+							saveChanges={this.saveChanges}
+							goBack={this.props.history.goBack}
+						/>
+						<div>{this.state.feedback}</div>
+					</div>
+				);
 			default:
 				return <div>loading ... </div>;
 		}

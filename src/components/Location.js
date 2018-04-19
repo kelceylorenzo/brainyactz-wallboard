@@ -8,20 +8,22 @@ class Location extends Component {
 		super(props);
 		this.state = {
 			walls: {},
-			wallToAdd: '',
-			title: ''
+			wallToAdd: ''
 		};
+
+		this.location = '';
 	}
 
 	componentDidMount() {
-		this.ref = base.syncState(`/locations/${this.props.location.pathname}/walls`, {
-			context: this,
-			state: 'walls'
+		const { location } = this.props.match.params;
+
+		base.fetch(`/locations/${location}/name`, { context: this }).then((locationName) => {
+			this.location = locationName;
 		});
 
-		base.syncState(`/locations/${this.props.location.pathname}/name`, {
+		this.ref = base.syncState(`/locations/${location}/walls`, {
 			context: this,
-			state: 'title'
+			state: 'walls'
 		});
 	}
 
@@ -58,7 +60,7 @@ class Location extends Component {
 	render() {
 		let wallsToRender = Object.keys(this.state.walls).map((currentWall, index) => {
 			return (
-				<Link key={index} to={`${this.props.match.params.location}/${currentWall}`}>
+				<Link className="selection" key={index} to={`${this.props.match.params.location}/${currentWall}`}>
 					{this.state.walls[currentWall].name}
 				</Link>
 			);
@@ -66,16 +68,21 @@ class Location extends Component {
 
 		return (
 			<div>
-				<h2>{this.state.title} - Wallboards</h2>
+				<div className="heading">
+					<Link className="header-link" to="/">
+						BrainyActz Wallboard Manager
+					</Link>
+					> {this.location}
+				</div>
 				<form onSubmit={this.handleWallFormSubmit}>
 					<input
 						type="text"
 						name="add-wall"
 						value={this.state.wallToAdd}
-						placeholder="Add New Wall"
+						placeholder="Wall Title"
 						onChange={this.handleWallInputChange}
 					/>
-					<button>Add Wall</button>
+					<button className="confirm">Add Wall</button>
 				</form>
 				{wallsToRender}
 			</div>
