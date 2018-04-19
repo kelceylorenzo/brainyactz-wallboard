@@ -19,6 +19,10 @@ class LandingPage extends Component {
 		});
 	}
 
+	componentWillUnmount() {
+		base.removeBinding(this.ref);
+	}
+
 	handleInputChange = (event) => {
 		this.setState({
 			locationToAdd: event.target.value
