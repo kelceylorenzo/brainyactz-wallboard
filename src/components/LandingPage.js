@@ -62,9 +62,9 @@ class LandingPage extends Component {
 		this.props.history.push(`/${selectedLocation}`);
 	};
 
-	removeLocation = (currentLocation) => {
+	removeLocation = (locationToRemove) => {
 		base
-			.remove(`/locations/${currentLocation}`)
+			.remove(`/locations/${locationToRemove}`)
 			.then(() => {
 				console.log('location was removed');
 			})
