@@ -108,6 +108,18 @@ button.form {
 	color: white;
 }
 
+.cancel {
+	background-color: white;
+	border: 2px solid #f1938d;
+	color: #f1938d;
+}
+
+.cancel:hover {
+	background-color: #f1938d;
+	border: 2px solid #f1938d;
+	color: white;
+}
+
 .active {
 	color: #82c382;
 	border-color: #82c382;
@@ -164,13 +176,13 @@ button.form {
 }
 
 .boards {
-	width: 70%;
+	width: 100%;
 }
 
 .board-listing {
 	margin: 15px;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	align-items: center;
 }
 
