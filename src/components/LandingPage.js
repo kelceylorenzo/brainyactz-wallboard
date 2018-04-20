@@ -62,17 +62,30 @@ class LandingPage extends Component {
 		this.props.history.push(`/${selectedLocation}`);
 	};
 
+	removeLocation = (currentLocation) => {
+		base
+			.remove(`/locations/${currentLocation}`)
+			.then(() => {
+				console.log('location was removed');
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
+	};
+
 	render() {
 		let locationsToRender = Object.keys(this.state.locations).map((currentLocation, index) => {
 			return (
-				<button
-					key={index}
-					value={this.state.locations[currentLocation].name}
-					onClick={this.redirectToCityPage}
-					className="selection"
-				>
-					{this.state.locations[currentLocation].name}
-				</button>
+				<div key={index}>
+					<button onClick={() => this.removeLocation(currentLocation)}>X</button>
+					<button
+						value={this.state.locations[currentLocation].name}
+						onClick={this.redirectToCityPage}
+						className="selection"
+					>
+						{this.state.locations[currentLocation].name}
+					</button>
+				</div>
 			);
 		});
 
