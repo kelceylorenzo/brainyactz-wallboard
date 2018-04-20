@@ -57,12 +57,27 @@ class Location extends Component {
 		});
 	};
 
+	removeWall = (wallToRemove) => {
+		const { location } = this.props.match.params;
+		base
+			.remove(`/locations/${location}/walls/${wallToRemove}`)
+			.then(() => {
+				console.log('wall was removed');
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
+	};
+
 	render() {
 		let wallsToRender = Object.keys(this.state.walls).map((currentWall, index) => {
 			return (
-				<Link className="selection" key={index} to={`${this.props.match.params.location}/${currentWall}`}>
-					{this.state.walls[currentWall].name}
-				</Link>
+				<div key={index}>
+					<button onClick={() => this.removeWall(currentWall)}>X</button>
+					<Link className="selection" to={`${this.props.match.params.location}/${currentWall}`}>
+						{this.state.walls[currentWall].name}
+					</Link>
+				</div>
 			);
 		});
 

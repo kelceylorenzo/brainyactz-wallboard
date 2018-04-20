@@ -51,6 +51,19 @@ class Collection extends Component {
 		});
 	};
 
+	deleteBoard = (event) => {
+		const { location, collectionId } = this.props.match.params;
+
+		base
+			.remove(`/locations/${location}/collections/${collectionId}/boards/${event.target.name}`)
+			.then(() => {
+				console.log('board was removed');
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
+	};
+
 	render() {
 		const { collectionId, location, wallId } = this.props.match.params;
 		const { boards } = this.state;
@@ -69,6 +82,9 @@ class Collection extends Component {
 					</Link>
 					<button className="selection active" onClick={this.setActiveBoard} name={currentBoard}>
 						Make Active
+					</button>
+					<button className="selection cancel" onClick={this.deleteBoard} name={currentBoard}>
+						Delete Board
 					</button>
 				</div>
 			);

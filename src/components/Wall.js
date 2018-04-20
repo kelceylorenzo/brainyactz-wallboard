@@ -61,13 +61,28 @@ class Wall extends Component {
 		});
 	};
 
+	removeCollection = (collectionToRemove) => {
+		const { location } = this.props.match.params;
+		base
+			.remove(`/locations/${location}/collections/${collectionToRemove}`)
+			.then(() => {
+				console.log('collection was removed');
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
+	};
+
 	render() {
 		const { location, wallId } = this.props.match.params;
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
-				<Link key={index} to={`/${location}/${wallId}/${currentCollection}`} className="selection">
-					{this.state.collections[currentCollection].name}
-				</Link>
+				<div key={index}>
+					<button onClick={() => this.removeCollection(currentCollection)}>X</button>
+					<Link to={`/${location}/${wallId}/${currentCollection}`} className="selection">
+						{this.state.collections[currentCollection].name}
+					</Link>
+				</div>
 			);
 		});
 
