@@ -16,6 +16,14 @@ body {
 
 /* general styling */
 
+a {
+	display: inline-block;
+}
+
+div {
+	position: relative;
+}
+
 form {
 	margin: 20px 0;
 }
@@ -64,6 +72,19 @@ button.form {
 	width: 100%;
 }
 
+.body {
+	display: flex;
+}
+
+.delete {
+	position: absolute;
+	border-radius: 50%;
+	top: -15px;
+	right: 0;
+	margin: 0px;
+	padding: 5px 10px;
+}
+
 .confirm {
 	background-color: #7abcd2;
 }
@@ -72,18 +93,6 @@ button.form {
 	background-color: white;
 	border: 2px solid #7abcd2;
 	color: #7abcd2;
-}
-
-.cancel {
-	background-color: white;
-	border: 2px solid #f1938d;
-	color: #f1938d;
-}
-
-.cancel:hover {
-	background-color: #f1938d;
-	border: 2px solid #f1938d;
-	color: white;
 }
 
 .selection {

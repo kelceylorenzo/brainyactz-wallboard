@@ -77,7 +77,9 @@ class LandingPage extends Component {
 		let locationsToRender = Object.keys(this.state.locations).map((currentLocation, index) => {
 			return (
 				<div key={index}>
-					<button onClick={() => this.removeLocation(currentLocation)}>X</button>
+					<button className="delete cancel" onClick={() => this.removeLocation(currentLocation)}>
+						X
+					</button>
 					<button
 						value={this.state.locations[currentLocation].name}
 						onClick={this.redirectToCityPage}
