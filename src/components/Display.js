@@ -94,6 +94,9 @@ class Display extends Component {
 					<Link className="selection active" to={`/${location}/${wallId}`}>
 						Add Boards
 					</Link>
+					<Link className="selection active" to={`/${location}/${wallId}/live`}>
+						Live Display
+					</Link>
 				</div>
 				<h3>Current Active Boards</h3>
 				<div className="body">
