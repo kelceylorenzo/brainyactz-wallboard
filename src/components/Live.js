@@ -20,16 +20,22 @@ class Live extends Component {
 			state: 'activeBoards',
 			then: () => {
 				const keys = Object.keys(this.state.activeBoards);
-				this.setState(
-					{
-						currentBoard: this.state.activeBoards[keys[0]]
-					},
-					() => {
-						if (keys.length > 1) {
-							setTimeout(this.changeBoard, 10000);
-						}
-					}
-				);
+				base
+					.fetch(this.state.activeBoards[keys[0]], {
+						context: this
+					})
+					.then((board) => {
+						this.setState(
+							{
+								currentBoard: board
+							},
+							() => {
+								if (keys.length > 1) {
+									setTimeout(this.changeBoard, 10000);
+								}
+							}
+						);
+					});
 			}
 		});
 	}
@@ -47,14 +53,20 @@ class Live extends Component {
 			this.currentActiveIndex++;
 		}
 
-		this.setState(
-			{
-				currentBoard: this.state.activeBoards[keys[this.currentActiveIndex]]
-			},
-			() => {
-				setTimeout(this.changeBoard, 10000);
-			}
-		);
+		base
+			.fetch(this.state.activeBoards[keys[this.currentActiveIndex]], {
+				context: this
+			})
+			.then((board) => {
+				this.setState(
+					{
+						currentBoard: board
+					},
+					() => {
+						setTimeout(this.changeBoard, 10000);
+					}
+				);
+			});
 	};
 
 	pullNewBoard = () => {
