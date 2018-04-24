@@ -45,10 +45,18 @@ class Collection extends Component {
 
 	setActiveBoard = (event) => {
 		const { location, wallId, collectionId } = this.props.match.params;
+		let boardToSet = {};
 
-		base.post(`/locations/${location}/walls/${wallId}/active`, {
-			data: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`
-		});
+		base
+			.fetch(`/locations/${location}/collections/${collectionId}/boards/${event.target.name}`, {
+				context: this
+			})
+			.then((board) => {
+				boardToSet = board;
+				base.push(`/locations/${location}/walls/${wallId}/active`, {
+					data: boardToSet
+				});
+			});
 	};
 
 	deleteBoard = (event) => {

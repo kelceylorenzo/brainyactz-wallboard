@@ -8,6 +8,7 @@ import NewBoardForm from './NewBoardForm';
 import EditBoardForm from './EditBoardForm';
 import Board from './Board';
 import Display from './Display';
+import Live from './Live';
 
 export default () => {
 	return (
@@ -16,6 +17,7 @@ export default () => {
 				<Route exact path="/" component={LandingPage} />
 				<Route exact path="/:location" component={Location} />
 				<Route exact path="/:location/:wallId/" component={Wall} />
+				<Route exact path="/:location/:wallId/live" component={Live} />
 				<Route exact path="/:location/:wallId/display" component={Display} />
 				<Route exact path="/:location/:wallId/:collectionId" component={Collection} />
 				<Route exact path="/:location/:wallId/:collectionId/form" component={NewBoardForm} />
