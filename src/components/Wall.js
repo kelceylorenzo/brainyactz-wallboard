@@ -78,7 +78,9 @@ class Wall extends Component {
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
 				<div key={index}>
-					<button onClick={() => this.removeCollection(currentCollection)}>X</button>
+					<button className="delete cancel" onClick={() => this.removeCollection(currentCollection)}>
+						X
+					</button>
 					<Link to={`/${location}/${wallId}/${currentCollection}`} className="selection">
 						{this.state.collections[currentCollection].name}
 					</Link>
@@ -108,10 +110,13 @@ class Wall extends Component {
 					/>
 					<button className="confirm">Add Collection</button>
 				</form>
-				<Link className="selection active" to={`${this.props.match.url}/display`}>
-					Display
-				</Link>
-				{collectionsToRender}
+
+				<div className="body">
+					<Link className="selection active" to={`${this.props.match.url}/display`}>
+						Display
+					</Link>
+					{collectionsToRender}
+				</div>
 			</div>
 		);
 	}

@@ -73,7 +73,9 @@ class Location extends Component {
 		let wallsToRender = Object.keys(this.state.walls).map((currentWall, index) => {
 			return (
 				<div key={index}>
-					<button onClick={() => this.removeWall(currentWall)}>X</button>
+					<button className="delete cancel" onClick={() => this.removeWall(currentWall)}>
+						X
+					</button>
 					<Link className="selection" to={`${this.props.match.params.location}/${currentWall}`}>
 						{this.state.walls[currentWall].name}
 					</Link>
@@ -82,7 +84,7 @@ class Location extends Component {
 		});
 
 		return (
-			<div>
+			<div className="container">
 				<div className="heading">
 					<Link className="header-link" to="/">
 						BrainyActz Wallboard Manager
@@ -99,7 +101,7 @@ class Location extends Component {
 					/>
 					<button className="confirm">Add Wall</button>
 				</form>
-				{wallsToRender}
+				<div className="body">{wallsToRender}</div>
 			</div>
 		);
 	}
