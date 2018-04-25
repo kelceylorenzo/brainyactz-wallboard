@@ -61,13 +61,30 @@ class Wall extends Component {
 		});
 	};
 
+	removeCollection = (collectionToRemove) => {
+		const { location } = this.props.match.params;
+		base
+			.remove(`/locations/${location}/collections/${collectionToRemove}`)
+			.then(() => {
+				console.log('collection was removed');
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
+	};
+
 	render() {
 		const { location, wallId } = this.props.match.params;
 		let collectionsToRender = Object.keys(this.state.collections).map((currentCollection, index) => {
 			return (
-				<Link key={index} to={`/${location}/${wallId}/${currentCollection}`} className="selection">
-					{this.state.collections[currentCollection].name}
-				</Link>
+				<div key={index}>
+					<button className="delete cancel" onClick={() => this.removeCollection(currentCollection)}>
+						X
+					</button>
+					<Link to={`/${location}/${wallId}/${currentCollection}`} className="selection">
+						{this.state.collections[currentCollection].name}
+					</Link>
+				</div>
 			);
 		});
 
@@ -93,10 +110,16 @@ class Wall extends Component {
 					/>
 					<button className="confirm">Add Collection</button>
 				</form>
-				<Link className="selection active" to={`${this.props.match.url}/display`}>
-					Display
-				</Link>
-				{collectionsToRender}
+				<div className="body">
+					<Link className="selection active" to={`${this.props.match.url}/live`}>
+						Live Display
+					</Link>
+					<Link className="selection edit" to={`${this.props.match.url}/display`}>
+						Display Info
+					</Link>
+				</div>
+				<div className="subheading">Collections</div>
+				<div className="body">{collectionsToRender}</div>
 			</div>
 		);
 	}

@@ -45,10 +45,27 @@ class Collection extends Component {
 
 	setActiveBoard = (event) => {
 		const { location, wallId, collectionId } = this.props.match.params;
+		let boardToSet = {};
 
-		base.post(`/locations/${location}/walls/${wallId}/active`, {
-			data: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`
+		base.push(`/locations/${location}/walls/${wallId}/active`, {
+			data: {
+				location: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`,
+				title: event.target.title
+			}
 		});
+	};
+
+	deleteBoard = (event) => {
+		const { location, collectionId } = this.props.match.params;
+
+		base
+			.remove(`/locations/${location}/collections/${collectionId}/boards/${event.target.name}`)
+			.then(() => {
+				console.log('board was removed');
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
 	};
 
 	render() {
@@ -67,8 +84,16 @@ class Collection extends Component {
 					>
 						Edit Board
 					</Link>
-					<button className="selection active" onClick={this.setActiveBoard} name={currentBoard}>
+					<button
+						className="selection active"
+						onClick={this.setActiveBoard}
+						name={currentBoard}
+						title={boards[currentBoard].title}
+					>
 						Make Active
+					</button>
+					<button className="selection cancel" onClick={this.deleteBoard} name={currentBoard}>
+						Delete Board
 					</button>
 				</div>
 			);
