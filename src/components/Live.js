@@ -11,6 +11,7 @@ class Live extends Component {
 			currentBoard: {}
 		};
 		this.currentActiveIndex = 0;
+		this.boardChange = null;
 	}
 
 	componentDidMount() {
@@ -21,7 +22,7 @@ class Live extends Component {
 			then: () => {
 				const keys = Object.keys(this.state.activeBoards);
 				base
-					.fetch(this.state.activeBoards[keys[0]], {
+					.fetch(this.state.activeBoards[keys[0]].location, {
 						context: this
 					})
 					.then((board) => {
@@ -31,7 +32,7 @@ class Live extends Component {
 							},
 							() => {
 								if (keys.length > 1) {
-									setTimeout(this.changeBoard, 10000);
+									this.boardChange = setTimeout(this.changeBoard, 10000);
 								}
 							}
 						);
@@ -42,6 +43,7 @@ class Live extends Component {
 
 	componentWillUnmount() {
 		base.removeBinding(this.ref);
+		clearTimeout(boardChange);
 	}
 
 	changeBoard = () => {
@@ -54,7 +56,7 @@ class Live extends Component {
 		}
 
 		base
-			.fetch(this.state.activeBoards[keys[this.currentActiveIndex]], {
+			.fetch(this.state.activeBoards[keys[this.currentActiveIndex]].location, {
 				context: this
 			})
 			.then((board) => {
@@ -63,7 +65,7 @@ class Live extends Component {
 						currentBoard: board
 					},
 					() => {
-						setTimeout(this.changeBoard, 10000);
+						this.boardChange = setTimeout(this.changeBoard, 10000);
 					}
 				);
 			});

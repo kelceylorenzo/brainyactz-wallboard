@@ -48,7 +48,10 @@ class Collection extends Component {
 		let boardToSet = {};
 
 		base.push(`/locations/${location}/walls/${wallId}/active`, {
-			data: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`
+			data: {
+				location: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`,
+				title: event.target.title
+			}
 		});
 	};
 
@@ -81,7 +84,12 @@ class Collection extends Component {
 					>
 						Edit Board
 					</Link>
-					<button className="selection active" onClick={this.setActiveBoard} name={currentBoard}>
+					<button
+						className="selection active"
+						onClick={this.setActiveBoard}
+						name={currentBoard}
+						title={boards[currentBoard].title}
+					>
 						Make Active
 					</button>
 					<button className="selection cancel" onClick={this.deleteBoard} name={currentBoard}>
