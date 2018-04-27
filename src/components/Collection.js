@@ -49,7 +49,11 @@ class Collection extends Component {
 
 		base.push(`/locations/${location}/walls/${wallId}/active`, {
 			data: {
-				location: `/locations/${location}/collections/${collectionId}/boards/${event.target.name}`,
+				fileLocation: {
+					location: location,
+					collection: collectionId,
+					board: event.target.name
+				},
 				title: event.target.title
 			}
 		});
