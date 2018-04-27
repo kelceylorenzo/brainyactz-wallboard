@@ -59,6 +59,7 @@ class Display extends Component {
 	render() {
 		const { location, wallId } = this.props.match.params;
 		let activeBoardsToRender = Object.keys(this.state.activeBoards).map((currentActive, index) => {
+			const { collection, board } = this.state.activeBoards[currentActive].fileLocation;
 			return (
 				<div key={index}>
 					<button className="delete cancel" name={currentActive} onClick={this.removeActiveBoard}>
