@@ -64,7 +64,7 @@ class Display extends Component {
 					<button className="delete cancel" name={currentActive} onClick={this.removeActiveBoard}>
 						X
 					</button>
-					<Link to={`/${location}/${wallId}/`} className="selection">
+					<Link to={`/${location}/${wallId}/${collection}/${board}/edit`} className="selection">
 						{this.state.activeBoards[currentActive].title}
 					</Link>
 				</div>
