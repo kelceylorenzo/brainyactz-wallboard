@@ -21,9 +21,8 @@ class Live extends Component {
 			state: 'activeBoards',
 			then: () => {
 				const keys = Object.keys(this.state.activeBoards);
-				const { board, collection } = this.state.activeBoards[keys[0]].fileLocation;
 				base
-					.fetch(`/locations/${location}/collections/${collection}/boards/${board}`, {
+					.fetch(this.state.activeBoards[keys[0]].location, {
 						context: this
 					})
 					.then((board) => {
@@ -56,12 +55,8 @@ class Live extends Component {
 			this.currentActiveIndex++;
 		}
 
-		const { location, collection, board } = this.state.activeBoards[
-			keys[this.currentActiveIndex]
-		].fileLocation;
-
 		base
-			.fetch(`/locations/${location}/collections/${collection}/boards/${board}`, {
+			.fetch(this.state.activeBoards[keys[this.currentActiveIndex]].location, {
 				context: this
 			})
 			.then((board) => {
@@ -74,6 +69,14 @@ class Live extends Component {
 					}
 				);
 			});
+	};
+
+	pullNewBoard = () => {
+		this.currentBoard = this.state.boardLocation;
+		base.syncState(this.state.boardLocation, {
+			context: this,
+			state: 'boardInfo'
+		});
 	};
 
 	render() {
