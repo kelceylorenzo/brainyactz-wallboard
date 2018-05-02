@@ -91,7 +91,7 @@ class EscapeRoomForm extends Component {
 				) : (
 					[
 						<button className="active" key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
-							Add LeaderBoard
+							Add Leader Board
 						</button>,
 						<button className="confirm" key="create" type="submit">
 							Create Board

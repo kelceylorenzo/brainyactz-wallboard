@@ -208,7 +208,7 @@ class LeaderBoardForm extends Component {
 					onChange={this.handleFifthInputChange}
 				/>
 				<button className="form confirm" onClick={this.saveLeaderBoard}>
-					Create Board
+					Save Changes
 				</button>
 			</div>
 		);

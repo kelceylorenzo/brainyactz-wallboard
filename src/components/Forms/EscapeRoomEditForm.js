@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import LeaderBoardEditForm from './LeaderBoardEditForm';
+import LeaderBoardForm from './LeaderBoardForm';
 
 class EscapeRoomEditForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			form: this.props.data,
-			feedback: ''
+			feedback: '',
+			newLeaderBoard: false
 		};
 	}
 
@@ -35,6 +37,12 @@ class EscapeRoomEditForm extends Component {
 				...form,
 				leaderBoard: updatedLeaderBoard
 			}
+		});
+	};
+
+	toggleNewLeaderBoard = () => {
+		this.setState({
+			newLeaderBoard: true
 		});
 	};
 
@@ -80,10 +88,19 @@ class EscapeRoomEditForm extends Component {
 							updateLeaderBoard={this.updateLeaderBoard}
 							submitForm={this.handleFormSubmit}
 						/>
+					) : this.state.newLeaderBoard ? (
+						<LeaderBoardForm />
 					) : (
-						''
+						[
+							<button key="add" type="button" className="active" onClick={this.toggleNewLeaderBoard}>
+								Add Leader Board
+							</button>,
+							<button key="save" className="confirm">
+								Save Changes
+							</button>
+						]
 					)}
-					<button className="confirm">Save Changes</button>
+
 					<button className="cancel" onClick={this.props.goBack}>
 						Cancel
 					</button>
