@@ -67,61 +67,16 @@ class EscapeRoomForm extends Component {
 		});
 	};
 
-	// updateLeaderBoard = (updatedLeaderBoard) => {
-	// 	const { form } = this.state;
-	// 	this.setState({
-	// 		form: {
-	// 			...form,
-	// 			leaderBoard: updatedLeaderBoard
-	// 		}
-	// 	});
-	// };
-
 	render() {
-		console.log('state: ', this.state);
 		const leaderTeams = Object.keys(this.state.form.leaderBoard).map((currentLeader, index) => {
-			return [
-				<input
-					type="text"
-					name="rank"
-					index={currentLeader}
-					value={this.state.form.leaderBoard[currentLeader].rank}
-					placeholder="Team Rank"
-					onChange={this.handleLeaderBoardInputChange}
-					className="input"
-					key={`rank-${index}`}
-				/>,
-				<input
-					type="text"
-					name="team"
-					index={currentLeader}
-					value={this.state.form.leaderBoard[currentLeader].team}
-					placeholder="Team Name"
-					onChange={this.handleLeaderBoardInputChange}
-					className="input"
-					key={`team-${index}`}
-				/>,
-				<input
-					type="text"
-					name="time"
-					index={currentLeader}
-					value={this.state.form.leaderBoard[currentLeader].time}
-					placeholder="Time Completed"
-					onChange={this.handleLeaderBoardInputChange}
-					className="input"
-					key={`time-${index}`}
-				/>,
-				<input
-					type="text"
-					name="date"
-					index={currentLeader}
-					value={this.state.form.leaderBoard[currentLeader].date}
-					placeholder="Date Completed"
-					onChange={this.handleLeaderBoardInputChange}
-					className="input"
-					key={`date-${index}`}
+			return (
+				<LeaderBoardForm
+					handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
+					data={this.state.form.leaderBoard[currentLeader]}
+					leaderID={currentLeader}
+					key={index}
 				/>
-			];
+			);
 		});
 		return (
 			<form className="new-board" onSubmit={this.handleFormSubmit}>
