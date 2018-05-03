@@ -30,6 +30,21 @@ class EscapeRoomForm extends Component {
 		this.setState({ form });
 	};
 
+	handleLeaderBoardInputChange = (event) => {
+		let { name, value, index } = event.target;
+		let { leaderBoard } = this.state.form;
+		const iD = event.target.attributes[2].nodeValue;
+
+		leaderBoard[iD][name] = value;
+
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard
+			}
+		});
+	};
+
 	handleFormSubmit = (event) => {
 		event.preventDefault();
 		this.props.submitForm(this.state.form);
@@ -41,17 +56,73 @@ class EscapeRoomForm extends Component {
 		});
 	};
 
-	updateLeaderBoard = (updatedLeaderBoard) => {
-		const { form } = this.state;
+	addTeam = () => {
+		const { leaderBoard } = this.state.form;
+		leaderBoard[Date.now()] = { team: '', time: '', date: '', rank: '' };
 		this.setState({
 			form: {
-				...form,
-				leaderBoard: updatedLeaderBoard
+				...this.state.form,
+				leaderBoard
 			}
 		});
 	};
 
+	// updateLeaderBoard = (updatedLeaderBoard) => {
+	// 	const { form } = this.state;
+	// 	this.setState({
+	// 		form: {
+	// 			...form,
+	// 			leaderBoard: updatedLeaderBoard
+	// 		}
+	// 	});
+	// };
+
 	render() {
+		console.log('state: ', this.state);
+		const leaderTeams = Object.keys(this.state.form.leaderBoard).map((currentLeader, index) => {
+			return [
+				<input
+					type="text"
+					name="rank"
+					index={currentLeader}
+					value={this.state.form.leaderBoard[currentLeader].rank}
+					placeholder="Team Rank"
+					onChange={this.handleLeaderBoardInputChange}
+					className="input"
+					key={`rank-${index}`}
+				/>,
+				<input
+					type="text"
+					name="team"
+					index={currentLeader}
+					value={this.state.form.leaderBoard[currentLeader].team}
+					placeholder="Team Name"
+					onChange={this.handleLeaderBoardInputChange}
+					className="input"
+					key={`team-${index}`}
+				/>,
+				<input
+					type="text"
+					name="time"
+					index={currentLeader}
+					value={this.state.form.leaderBoard[currentLeader].time}
+					placeholder="Time Completed"
+					onChange={this.handleLeaderBoardInputChange}
+					className="input"
+					key={`time-${index}`}
+				/>,
+				<input
+					type="text"
+					name="date"
+					index={currentLeader}
+					value={this.state.form.leaderBoard[currentLeader].date}
+					placeholder="Date Completed"
+					onChange={this.handleLeaderBoardInputChange}
+					className="input"
+					key={`date-${index}`}
+				/>
+			];
+		});
 		return (
 			<form className="new-board" onSubmit={this.handleFormSubmit}>
 				<label>Title/Name</label>
@@ -87,17 +158,25 @@ class EscapeRoomForm extends Component {
 					onChange={this.handleInputChange}
 				/>
 				{this.state.leaderBoardStatus ? (
-					<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
-				) : (
 					[
-						<button className="active" key="toggle" type="button" onClick={this.toggleLeaderBoardForm}>
-							Add Leader Board
+						<button key="add-team" type="button" onClick={this.addTeam}>
+							Add Team
 						</button>,
-						<button className="confirm" key="create" type="submit">
-							Save Board
+						<button key="cancel" type="button">
+							Cancel
 						</button>
 					]
+				) : (
+					<button className="active" type="button" onClick={this.toggleLeaderBoardForm}>
+						Add Leader Board
+					</button>
 				)}
+
+				{leaderTeams}
+
+				<button className="confirm" key="create" type="submit">
+					Save Board
+				</button>
 			</form>
 		);
 	}

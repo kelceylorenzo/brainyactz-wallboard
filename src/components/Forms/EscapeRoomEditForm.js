@@ -52,7 +52,6 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	render() {
-		console.log(this.state.form);
 		return (
 			<div>
 				<form className="edit-board" onSubmit={this.handleFormSubmit}>
