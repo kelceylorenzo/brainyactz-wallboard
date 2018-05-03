@@ -32,12 +32,17 @@ class EscapeRoomEditForm extends Component {
 
 	updateLeaderBoard = (updatedLeaderBoard) => {
 		const { form } = this.state;
-		this.setState({
-			form: {
-				...form,
-				leaderBoard: updatedLeaderBoard
+		this.setState(
+			{
+				form: {
+					...form,
+					leaderBoard: updatedLeaderBoard
+				}
+			},
+			() => {
+				this.handleFormSubmit(event);
 			}
-		});
+		);
 	};
 
 	toggleNewLeaderBoard = () => {
@@ -47,6 +52,7 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	render() {
+		console.log(this.state.form);
 		return (
 			<div>
 				<form className="edit-board" onSubmit={this.handleFormSubmit}>
@@ -83,20 +89,26 @@ class EscapeRoomEditForm extends Component {
 						onChange={this.handleInputChange}
 					/>
 					{this.state.form.leaderBoard ? (
-						<LeaderBoardEditForm
-							data={this.state.form.leaderBoard}
-							updateLeaderBoard={this.updateLeaderBoard}
-							submitForm={this.handleFormSubmit}
-						/>
+						[
+							<LeaderBoardEditForm
+								data={this.state.form.leaderBoard}
+								updateLeaderBoard={this.updateLeaderBoard}
+								submitForm={this.handleFormSubmit}
+								key="lbedit"
+							/>,
+							<button key="save" className="confirm">
+								Save Board
+							</button>
+						]
 					) : this.state.newLeaderBoard ? (
-						<LeaderBoardForm />
+						<LeaderBoardForm updateLeaderBoard={this.updateLeaderBoard} />
 					) : (
 						[
 							<button key="add" type="button" className="active" onClick={this.toggleNewLeaderBoard}>
 								Add Leader Board
 							</button>,
 							<button key="save" className="confirm">
-								Save Changes
+								Save Board
 							</button>
 						]
 					)}

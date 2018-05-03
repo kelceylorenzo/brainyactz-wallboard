@@ -94,7 +94,7 @@ class EscapeRoomForm extends Component {
 							Add Leader Board
 						</button>,
 						<button className="confirm" key="create" type="submit">
-							Create Board
+							Save Board
 						</button>
 					]
 				)}
