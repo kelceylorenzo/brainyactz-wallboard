@@ -86,6 +86,7 @@ class LeaderBoardForm extends Component {
 			fifth
 		});
 	};
+
 	saveLeaderBoard = () => {
 		this.props.updateLeaderBoard(this.state);
 	};
@@ -208,7 +209,7 @@ class LeaderBoardForm extends Component {
 					onChange={this.handleFifthInputChange}
 				/>
 				<button className="form confirm" onClick={this.saveLeaderBoard}>
-					Save Changes
+					Save Board
 				</button>
 			</div>
 		);
