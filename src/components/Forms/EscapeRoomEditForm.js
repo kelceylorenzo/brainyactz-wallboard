@@ -115,7 +115,11 @@ class EscapeRoomEditForm extends Component {
 						placeholder="Video URL"
 						onChange={this.handleInputChange}
 					/>
-					{this.state.newLeaderBoard ? (
+					{!this.state.newLeaderBoard && !this.state.form.leaderBoard ? (
+						<button type="button" className="active" onClick={this.toggleNewLeaderBoard}>
+							Add Leader Board
+						</button>
+					) : (
 						[
 							<button key="add-team" type="button" onClick={this.addTeam}>
 								Add Team
@@ -124,10 +128,6 @@ class EscapeRoomEditForm extends Component {
 								Cancel
 							</button>
 						]
-					) : (
-						<button type="button" className="active" onClick={this.toggleNewLeaderBoard}>
-							Add Leader Board
-						</button>
 					)}
 					{leaderTeams}
 					<button key="save" className="confirm">
