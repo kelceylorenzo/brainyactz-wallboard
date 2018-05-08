@@ -65,6 +65,14 @@ class EscapeRoomEditForm extends Component {
 		});
 	};
 
+	removeLeaderBoard = () => {
+		console.log('remove entire leaderBoard');
+	};
+
+	removeTeam = () => {
+		console.log('remove team');
+	};
+
 	render() {
 		let leaderTeams = [];
 		if (this.state.form.leaderBoard) {
@@ -72,6 +80,7 @@ class EscapeRoomEditForm extends Component {
 				return (
 					<LeaderBoardForm
 						handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
+						removeTeam={this.removeTeam}
 						data={this.state.form.leaderBoard[currentLeader]}
 						leaderID={currentLeader}
 						key={index}
@@ -83,7 +92,6 @@ class EscapeRoomEditForm extends Component {
 		return (
 			<div>
 				<form className="edit-board" onSubmit={this.handleFormSubmit}>
-					<label>Title/Name</label>
 					<input
 						type="text"
 						name="title"
@@ -91,7 +99,8 @@ class EscapeRoomEditForm extends Component {
 						placeholder="Title/Name"
 						onChange={this.handleInputChange}
 					/>
-					<label>Subtitle</label>
+					<label>Title/Name</label>
+
 					<input
 						type="text"
 						name="subtitle"
@@ -99,7 +108,7 @@ class EscapeRoomEditForm extends Component {
 						placeholder="Subtitle"
 						onChange={this.handleInputChange}
 					/>
-					<label>Background Image</label>
+					<label>Subtitle</label>
 					<input
 						type="url"
 						name="backgroundImage"
@@ -107,7 +116,7 @@ class EscapeRoomEditForm extends Component {
 						placeholder="Background Image URL"
 						onChange={this.handleInputChange}
 					/>
-					<label>Video</label>
+					<label>Background Image</label>
 					<input
 						type="text"
 						name="video"
@@ -115,17 +124,23 @@ class EscapeRoomEditForm extends Component {
 						placeholder="Video URL"
 						onChange={this.handleInputChange}
 					/>
+					<label>Video</label>
 					{!this.state.newLeaderBoard && !this.state.form.leaderBoard ? (
 						<button type="button" className="active" onClick={this.toggleNewLeaderBoard}>
 							Add Leader Board
 						</button>
 					) : (
 						[
-							<button key="add-team" type="button" onClick={this.addTeam}>
+							<button key="add-team" className="active" type="button" onClick={this.addTeam}>
 								Add Team
 							</button>,
-							<button key="cancel-team" type="button" onClick={this.addTeam}>
-								Cancel
+							<button
+								key="cancel"
+								className="selection leaderboard-button"
+								type="button"
+								onClick={this.removeLeaderBoard}
+							>
+								Remove Leader Board
 							</button>
 						]
 					)}
