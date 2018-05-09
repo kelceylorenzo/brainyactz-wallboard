@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import base from '../../base';
 import LeaderBoardForm from './LeaderBoardForm';
 
 class EscapeRoomEditForm extends Component {
@@ -66,11 +67,22 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	removeLeaderBoard = () => {
-		console.log('remove entire leaderBoard');
+		const newForm = this.state.form;
+		delete newForm.leaderBoard;
+		this.setState({
+			form: newForm
+		});
 	};
 
-	removeTeam = () => {
-		console.log('remove team');
+	removeTeam = (leaderID) => {
+		const newLeaderBoard = this.state.form.leaderBoard;
+		delete newLeaderBoard[leaderID];
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: newLeaderBoard
+			}
+		});
 	};
 
 	render() {
@@ -97,6 +109,7 @@ class EscapeRoomEditForm extends Component {
 						name="title"
 						value={this.state.form.title}
 						placeholder="Title/Name"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
 					<label>Title/Name</label>
@@ -106,6 +119,7 @@ class EscapeRoomEditForm extends Component {
 						name="subtitle"
 						value={this.state.form.subtitle}
 						placeholder="Subtitle"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
 					<label>Subtitle</label>
@@ -114,6 +128,7 @@ class EscapeRoomEditForm extends Component {
 						name="backgroundImage"
 						value={this.state.form.backgroundImage}
 						placeholder="Background Image URL"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
 					<label>Background Image</label>
@@ -122,6 +137,7 @@ class EscapeRoomEditForm extends Component {
 						name="video"
 						value={`https://www.youtube.com/watch?v=${this.state.form.video}`}
 						placeholder="Video URL"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
 					<label>Video</label>

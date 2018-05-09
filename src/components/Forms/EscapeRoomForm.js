@@ -80,6 +80,7 @@ class EscapeRoomForm extends Component {
 			return (
 				<LeaderBoardForm
 					handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
+					removeTeam={this.removeTeam}
 					data={this.state.form.leaderBoard[currentLeader]}
 					leaderID={currentLeader}
 					key={index}
