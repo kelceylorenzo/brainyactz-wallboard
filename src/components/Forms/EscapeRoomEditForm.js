@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import base from '../../base';
 import LeaderBoardForm from './LeaderBoardForm';
 
 class EscapeRoomEditForm extends Component {
@@ -65,6 +66,25 @@ class EscapeRoomEditForm extends Component {
 		});
 	};
 
+	removeLeaderBoard = () => {
+		const newForm = this.state.form;
+		delete newForm.leaderBoard;
+		this.setState({
+			form: newForm
+		});
+	};
+
+	removeTeam = (leaderID) => {
+		const newLeaderBoard = this.state.form.leaderBoard;
+		delete newLeaderBoard[leaderID];
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: newLeaderBoard
+			}
+		});
+	};
+
 	render() {
 		let leaderTeams = [];
 		if (this.state.form.leaderBoard) {
@@ -72,6 +92,7 @@ class EscapeRoomEditForm extends Component {
 				return (
 					<LeaderBoardForm
 						handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
+						removeTeam={this.removeTeam}
 						data={this.state.form.leaderBoard[currentLeader]}
 						leaderID={currentLeader}
 						key={index}
@@ -83,49 +104,59 @@ class EscapeRoomEditForm extends Component {
 		return (
 			<div>
 				<form className="edit-board" onSubmit={this.handleFormSubmit}>
-					<label>Title/Name</label>
 					<input
 						type="text"
 						name="title"
 						value={this.state.form.title}
 						placeholder="Title/Name"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
-					<label>Subtitle</label>
+					<label>Title/Name</label>
+
 					<input
 						type="text"
 						name="subtitle"
 						value={this.state.form.subtitle}
 						placeholder="Subtitle"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
-					<label>Background Image</label>
+					<label>Subtitle</label>
 					<input
 						type="url"
 						name="backgroundImage"
 						value={this.state.form.backgroundImage}
 						placeholder="Background Image URL"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
-					<label>Video</label>
+					<label>Background Image</label>
 					<input
 						type="text"
 						name="video"
 						value={`https://www.youtube.com/watch?v=${this.state.form.video}`}
 						placeholder="Video URL"
+						className="form-input"
 						onChange={this.handleInputChange}
 					/>
+					<label>Video</label>
 					{!this.state.newLeaderBoard && !this.state.form.leaderBoard ? (
 						<button type="button" className="active" onClick={this.toggleNewLeaderBoard}>
 							Add Leader Board
 						</button>
 					) : (
 						[
-							<button key="add-team" type="button" onClick={this.addTeam}>
+							<button key="add-team" className="active" type="button" onClick={this.addTeam}>
 								Add Team
 							</button>,
-							<button key="cancel-team" type="button" onClick={this.addTeam}>
-								Cancel
+							<button
+								key="cancel"
+								className="selection leaderboard-button"
+								type="button"
+								onClick={this.removeLeaderBoard}
+							>
+								Remove Leader Board
 							</button>
 						]
 					)}

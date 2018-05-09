@@ -67,11 +67,20 @@ class EscapeRoomForm extends Component {
 		});
 	};
 
+	removeLeaderBoard = () => {
+		console.log('remove entire leaderBoard');
+	};
+
+	removeTeam = () => {
+		console.log('remove team');
+	};
+
 	render() {
 		const leaderTeams = Object.keys(this.state.form.leaderBoard).map((currentLeader, index) => {
 			return (
 				<LeaderBoardForm
 					handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
+					removeTeam={this.removeTeam}
 					data={this.state.form.leaderBoard[currentLeader]}
 					leaderID={currentLeader}
 					key={index}
@@ -114,11 +123,11 @@ class EscapeRoomForm extends Component {
 				/>
 				{this.state.leaderBoardStatus ? (
 					[
-						<button key="add-team" type="button" onClick={this.addTeam}>
+						<button key="add-team" type="button" className="active" onClick={this.addTeam}>
 							Add Team
 						</button>,
-						<button key="cancel" type="button">
-							Cancel
+						<button key="cancel" type="button" onClick={this.removeLeaderBoard}>
+							Remove Leader Board
 						</button>
 					]
 				) : (

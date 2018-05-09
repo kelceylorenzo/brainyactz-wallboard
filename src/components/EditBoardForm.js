@@ -61,6 +61,7 @@ class EditBoardForm extends Component {
 							data={this.state.originalBoardData}
 							saveChanges={this.saveChanges}
 							goBack={this.props.history.goBack}
+							boardLocation={this.props.match.params}
 						/>
 						<div>{this.state.feedback}</div>
 					</div>
