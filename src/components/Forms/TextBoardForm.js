@@ -55,7 +55,7 @@ class TextBoardForm extends Component {
 					rows="5"
 					onChange={this.handleInputChange}
 				/>
-				<button className="confirm">Create Board</button>
+				<button className="confirm">Save Board</button>
 			</form>
 		);
 	}
