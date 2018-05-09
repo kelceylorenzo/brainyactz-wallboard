@@ -67,22 +67,40 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	removeLeaderBoard = () => {
-		const newForm = this.state.form;
-		delete newForm.leaderBoard;
-		this.setState({
-			form: newForm
-		});
+		const { location, collectionId, boardId } = this.props.boardLocation;
+		base
+			.remove(`/locations/${location}/collections/${collectionId}/boards/${boardId}/leaderBoard`)
+			.then(() => {
+				const newForm = this.state.form;
+				delete newForm.leaderBoard;
+				this.setState({
+					form: newForm
+				});
+			});
 	};
 
 	removeTeam = (leaderID) => {
-		const newLeaderBoard = this.state.form.leaderBoard;
-		delete newLeaderBoard[leaderID];
-		this.setState({
-			form: {
-				...this.state.form,
-				leaderBoard: newLeaderBoard
-			}
-		});
+		const { location, collectionId, boardId } = this.props.boardLocation;
+
+		base
+			.remove(`/locations/${location}/collections/${collectionId}/boards/${boardId}/leaderBoard/${leaderID}`)
+			.then(() => {
+				base
+					.fetch(`/locations/${location}/collections/${collectionId}/boards/${boardId}/leaderBoard`, {
+						context: this
+					})
+					.then((leaderBoard) => {
+						this.setState({
+							form: {
+								...this.state.form,
+								leaderBoard
+							}
+						});
+					});
+			})
+			.catch((error) => {
+				console.log('error: ', error);
+			});
 	};
 
 	render() {
