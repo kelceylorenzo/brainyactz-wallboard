@@ -90,7 +90,6 @@ class EscapeRoomEditForm extends Component {
 	render() {
 		let leaderTeams = [];
 		if (this.state.form.leaderBoard) {
-			console.log(this.state.form.leaderBoard);
 			leaderTeams = Object.keys(this.state.form.leaderBoard).map((currentLeader, index) => {
 				if (this.state.form.leaderBoard[currentLeader]) {
 					return (
