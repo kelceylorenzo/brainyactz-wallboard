@@ -25,9 +25,23 @@ class EscapeRoomEditForm extends Component {
 		this.setState({ form });
 	};
 
+	handleLeaderBoardInputChange = (event) => {
+		let { name, value, index } = event.target;
+		let { leaderBoard } = this.state.form;
+		const iD = event.target.attributes[2].nodeValue;
+
+		leaderBoard[iD][name] = value;
+
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard
+			}
+		});
+	};
+
 	handleFormSubmit = (event) => {
 		event.preventDefault();
-		console.log(this.state.form);
 		this.props.saveChanges(this.state.form);
 	};
 
@@ -44,21 +58,6 @@ class EscapeRoomEditForm extends Component {
 		}
 
 		leaderBoard[Date.now()] = { team: '', time: '', date: '', rank: '' };
-		this.setState({
-			form: {
-				...this.state.form,
-				leaderBoard
-			}
-		});
-	};
-
-	handleLeaderBoardInputChange = (event) => {
-		let { name, value, index } = event.target;
-		let { leaderBoard } = this.state.form;
-		const iD = event.target.attributes[2].nodeValue;
-
-		leaderBoard[iD][name] = value;
-
 		this.setState({
 			form: {
 				...this.state.form,

@@ -36,7 +36,7 @@ class Display extends Component {
 		base
 			.remove(`/locations/${location}/walls/${wallId}/active/${event.target.name}`)
 			.then(() => {
-				console.log('board was removed from active');
+				console.log('success');
 			})
 			.catch((error) => {
 				console.log('error: ', error);
@@ -49,25 +49,65 @@ class Display extends Component {
 		base
 			.remove(`/locations/${location}/walls/${wallId}/active/`)
 			.then(() => {
-				console.log('all boards removed from active');
+				console.log('success');
 			})
 			.catch((error) => {
 				console.log('error: ', error);
 			});
 	};
 
+	changeDuration = (event) => {
+		const { value, name } = event.target;
+		let newActiveBoards = this.state.activeBoards;
+
+		newActiveBoards[name].fileLocation.duration = value * 60000;
+
+		this.setState(newActiveBoards);
+	};
+
+	saveDuration = (event, activeBoard) => {
+		event.preventDefault();
+		const { location, wallId } = this.props.match.params;
+		base.update(`locations/${location}/walls/${wallId}/active/${activeBoard}/fileLocation`, {
+			data: this.state.activeBoards[activeBoard].fileLocation
+		});
+	};
+
 	render() {
 		const { location, wallId } = this.props.match.params;
 		let activeBoardsToRender = Object.keys(this.state.activeBoards).map((currentActive, index) => {
 			const { collection, board } = this.state.activeBoards[currentActive].fileLocation;
+			const duration = this.state.activeBoards[currentActive].fileLocation.duration / 60000;
 			return (
 				<div key={index}>
-					<button className="delete cancel" name={currentActive} onClick={this.removeActiveBoard}>
-						X
-					</button>
-					<Link to={`/${location}/${wallId}/${collection}/${board}/edit`} className="selection">
-						{this.state.activeBoards[currentActive].title}
-					</Link>
+					<div className="display-listing">
+						<div>{this.state.activeBoards[currentActive].title}</div>
+						<form
+							className="duration-form"
+							onSubmit={(event) => this.saveDuration(event, currentActive)}
+						>
+							<input
+								name={currentActive}
+								className="duration-input"
+								type="number"
+								value={duration}
+								onChange={this.changeDuration}
+							/>{' '}
+							min(s).
+							<button className="active">✓</button>
+						</form>
+						<Link to={`/${location}/${wallId}/${collection}/${board}/edit`} className="selection edit">
+							Edit Board
+						</Link>
+						<button
+							key={`delete-${currentActive}`}
+							className="cancel"
+							name={currentActive}
+							onClick={this.removeActiveBoard}
+						>
+							Remove From Live
+						</button>
+					</div>
 				</div>
 			);
 		});
@@ -101,7 +141,9 @@ class Display extends Component {
 				</div>
 				<h3>Current Active Boards</h3>
 				<div className="body">
-					{activeBoardsToRender[0] ? activeBoardsToRender : 'No boards currently active'}
+					<div style={{ width: '100%' }}>
+						{activeBoardsToRender[0] ? activeBoardsToRender : 'No boards currently active'}
+					</div>
 				</div>
 			</div>
 		);
