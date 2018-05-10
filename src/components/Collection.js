@@ -52,7 +52,8 @@ class Collection extends Component {
 				fileLocation: {
 					location: location,
 					collection: collectionId,
-					board: event.target.name
+					board: event.target.name,
+					duration: 60000
 				},
 				title: event.target.title
 			}

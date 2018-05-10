@@ -68,11 +68,23 @@ class EscapeRoomForm extends Component {
 	};
 
 	removeLeaderBoard = () => {
-		console.log('remove entire leaderBoard');
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: null
+			}
+		});
 	};
 
-	removeTeam = () => {
-		console.log('remove team');
+	removeTeam = (leaderID) => {
+		let newLeaderboard = this.state.form.leaderBoard;
+		newLeaderboard[leaderID] = null;
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: newLeaderboard
+			}
+		});
 	};
 
 	render() {
