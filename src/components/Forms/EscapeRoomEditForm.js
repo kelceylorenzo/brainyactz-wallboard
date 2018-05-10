@@ -27,6 +27,7 @@ class EscapeRoomEditForm extends Component {
 
 	handleFormSubmit = (event) => {
 		event.preventDefault();
+		console.log(this.state.form);
 		this.props.saveChanges(this.state.form);
 	};
 
@@ -67,55 +68,41 @@ class EscapeRoomEditForm extends Component {
 	};
 
 	removeLeaderBoard = () => {
-		const { location, collectionId, boardId } = this.props.boardLocation;
-		base
-			.remove(`/locations/${location}/collections/${collectionId}/boards/${boardId}/leaderBoard`)
-			.then(() => {
-				const newForm = this.state.form;
-				delete newForm.leaderBoard;
-				this.setState({
-					form: newForm
-				});
-			});
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: null
+			}
+		});
 	};
 
 	removeTeam = (leaderID) => {
-		const { location, collectionId, boardId } = this.props.boardLocation;
-
-		base
-			.remove(`/locations/${location}/collections/${collectionId}/boards/${boardId}/leaderBoard/${leaderID}`)
-			.then(() => {
-				base
-					.fetch(`/locations/${location}/collections/${collectionId}/boards/${boardId}/leaderBoard`, {
-						context: this
-					})
-					.then((leaderBoard) => {
-						this.setState({
-							form: {
-								...this.state.form,
-								leaderBoard
-							}
-						});
-					});
-			})
-			.catch((error) => {
-				console.log('error: ', error);
-			});
+		let newLeaderboard = this.state.form.leaderBoard;
+		newLeaderboard[leaderID] = null;
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: newLeaderboard
+			}
+		});
 	};
 
 	render() {
 		let leaderTeams = [];
 		if (this.state.form.leaderBoard) {
+			console.log(this.state.form.leaderBoard);
 			leaderTeams = Object.keys(this.state.form.leaderBoard).map((currentLeader, index) => {
-				return (
-					<LeaderBoardForm
-						handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
-						removeTeam={this.removeTeam}
-						data={this.state.form.leaderBoard[currentLeader]}
-						leaderID={currentLeader}
-						key={index}
-					/>
-				);
+				if (this.state.form.leaderBoard[currentLeader]) {
+					return (
+						<LeaderBoardForm
+							handleLeaderBoardInputChange={this.handleLeaderBoardInputChange}
+							removeTeam={this.removeTeam}
+							data={this.state.form.leaderBoard[currentLeader]}
+							leaderID={currentLeader}
+							key={index}
+						/>
+					);
+				}
 			});
 		}
 
