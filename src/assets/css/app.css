@@ -161,6 +161,19 @@ button.form {
 	color: white;
 }
 
+.selected {
+	background-color: #82c382;
+	border: 2px solid #82c382;
+	color: white;
+}
+
+.selected:hover {
+	background-color: #82c382;
+	border: 2px solid #82c382;
+	color: white;
+	cursor: default;
+}
+
 .cancel {
 	background-color: white;
 	border: 2px solid #f1938d;
