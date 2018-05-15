@@ -7,6 +7,7 @@ class GridForm extends Component {
 		this.state = {
 			gridToAdd: {
 				title: '',
+				type: 'grid',
 				boards: {}
 			},
 			boardOptions: {},

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import base from '../base';
 import TextBoard from './Wallboards/TextBoard';
 import EscapeRoom from './Wallboards/EscapeRoom';
+import Grid from './Wallboards/Grid';
 
 class Live extends Component {
 	constructor(props) {
@@ -96,6 +97,8 @@ class Live extends Component {
 						leaderBoard={this.state.currentBoard.leaderBoard}
 					/>
 				);
+			case 'grid':
+				return <Grid boardData={this.state.currentBoard} />;
 			default:
 				return <div>loading</div>;
 		}
