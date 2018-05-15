@@ -84,7 +84,7 @@ class NewBoardForm extends Component {
 				) : this.state.formType === 'escape-room' ? (
 					<EscapeRoomForm submitForm={this.submitForm} />
 				) : this.state.formType === 'grid' ? (
-					<GridForm submitForm={this.submitForm} />
+					<GridForm location={this.props.match.params.location} submitForm={this.submitForm} />
 				) : (
 					''
 				)}
