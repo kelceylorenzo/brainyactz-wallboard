@@ -68,11 +68,23 @@ class EscapeRoomForm extends Component {
 	};
 
 	removeLeaderBoard = () => {
-		console.log('remove entire leaderBoard');
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: null
+			}
+		});
 	};
 
-	removeTeam = () => {
-		console.log('remove team');
+	removeTeam = (leaderID) => {
+		let newLeaderboard = this.state.form.leaderBoard;
+		newLeaderboard[leaderID] = null;
+		this.setState({
+			form: {
+				...this.state.form,
+				leaderBoard: newLeaderboard
+			}
+		});
 	};
 
 	render() {
@@ -89,38 +101,38 @@ class EscapeRoomForm extends Component {
 		});
 		return (
 			<form className="new-board" onSubmit={this.handleFormSubmit}>
-				<label>Title/Name</label>
 				<input
+					className="form-input"
 					type="text"
 					name="title"
 					value={this.state.title}
-					placeholder="Title/Name"
+					onChange={this.handleInputChange}
+				/>
+				<label>Title/Name</label>
+				<input
+					className="form-input"
+					type="text"
+					name="subtitle"
+					value={this.state.subtitle}
 					onChange={this.handleInputChange}
 				/>
 				<label>Subtitle</label>
 				<input
+					className="form-input"
 					type="text"
-					name="subtitle"
-					value={this.state.subtitle}
-					placeholder="Subtitle"
+					name="backgroundImage"
+					value={this.state.backgroundImage}
 					onChange={this.handleInputChange}
 				/>
 				<label>Background Image</label>
 				<input
-					type="text"
-					name="backgroundImage"
-					value={this.state.backgroundImage}
-					placeholder="Background Image URL"
-					onChange={this.handleInputChange}
-				/>
-				<label>Video</label>
-				<input
+					className="form-input"
 					type="text"
 					name="video"
 					value={this.state.video}
-					placeholder="Video URL"
 					onChange={this.handleInputChange}
 				/>
+				<label>Video</label>
 				{this.state.leaderBoardStatus ? (
 					[
 						<button key="add-team" type="button" className="active" onClick={this.addTeam}>

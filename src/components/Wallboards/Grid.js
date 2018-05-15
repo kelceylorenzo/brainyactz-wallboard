@@ -1,5 +1,4 @@
 import React from 'react';
-import EscapeRoom from './EscapeRoom';
 
 export default (props) => {
 	return (

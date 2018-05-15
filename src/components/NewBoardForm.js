@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import TextBoardForm from './Forms/TextBoardForm';
 import EscapeRoomForm from './Forms/EscapeRoomForm';
+import GridForm from './Forms/GridForm';
 import base from '../base';
 
 class NewBoardForm extends Component {
@@ -33,10 +34,13 @@ class NewBoardForm extends Component {
 	};
 
 	submitForm = (formData) => {
-		this.setState({
-			boardData: formData,
-			feedback: 'Board Created!'
-		});
+		this.setState(
+			{
+				boardData: formData,
+				feedback: 'Board Created!'
+			},
+			this.props.history.goBack
+		);
 	};
 
 	render() {
@@ -49,7 +53,9 @@ class NewBoardForm extends Component {
 				<form className="new-board">
 					<label>Select Board Type</label>
 					<button
-						className="form selection"
+						className={
+							this.state.formType === 'text-board' ? 'form selection selected' : 'form selection'
+						}
 						name="form-type"
 						value="text-board"
 						onClick={this.changeFormType}
@@ -57,12 +63,22 @@ class NewBoardForm extends Component {
 						Text Board
 					</button>
 					<button
-						className="form selection"
+						className={
+							this.state.formType === 'escape-room' ? 'form selection selected' : 'form selection'
+						}
 						name="form-type"
 						value="escape-room"
 						onClick={this.changeFormType}
 					>
 						Escape Room
+					</button>
+					<button
+						className={this.state.formType === 'grid' ? 'form selection selected' : 'form selection'}
+						name="form-type"
+						value="grid"
+						onClick={this.changeFormType}
+					>
+						Escape Room Grid
 					</button>
 				</form>
 
@@ -70,6 +86,8 @@ class NewBoardForm extends Component {
 					<TextBoardForm submitForm={this.submitForm} />
 				) : this.state.formType === 'escape-room' ? (
 					<EscapeRoomForm submitForm={this.submitForm} />
+				) : this.state.formType === 'grid' ? (
+					<GridForm location={this.props.match.params.location} submitForm={this.submitForm} />
 				) : (
 					''
 				)}
