@@ -34,10 +34,13 @@ class NewBoardForm extends Component {
 	};
 
 	submitForm = (formData) => {
-		this.setState({
-			boardData: formData,
-			feedback: 'Board Created!'
-		});
+		this.setState(
+			{
+				boardData: formData,
+				feedback: 'Board Created!'
+			},
+			this.props.history.goBack
+		);
 	};
 
 	render() {

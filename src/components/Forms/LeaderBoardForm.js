@@ -8,7 +8,6 @@ export default (props) => {
 				name="rank"
 				index={props.leaderID}
 				value={props.data.rank}
-				placeholder="Team Rank"
 				className="form-input"
 				onChange={props.handleLeaderBoardInputChange}
 			/>
@@ -18,7 +17,6 @@ export default (props) => {
 				name="team"
 				index={props.leaderID}
 				value={props.data.team}
-				placeholder="Team Name"
 				className="form-input"
 				onChange={props.handleLeaderBoardInputChange}
 			/>
@@ -28,7 +26,6 @@ export default (props) => {
 				name="time"
 				index={props.leaderID}
 				value={props.data.time}
-				placeholder="Time Completed"
 				className="form-input"
 				onChange={props.handleLeaderBoardInputChange}
 			/>
@@ -38,7 +35,6 @@ export default (props) => {
 				name="date"
 				index={props.leaderID}
 				value={props.data.date}
-				placeholder="Date Completed"
 				className="form-input"
 				onChange={props.handleLeaderBoardInputChange}
 			/>

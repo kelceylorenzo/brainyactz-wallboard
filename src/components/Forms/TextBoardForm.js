@@ -30,31 +30,33 @@ class TextBoardForm extends Component {
 	render() {
 		return (
 			<form className="new-board" onSubmit={this.handleFormSubmit}>
-				<label>Title/Name:</label>
 				<input
+					className="form-input"
 					type="text"
 					name="title"
 					value={this.state.title}
-					placeholder="Title/Name"
 					onChange={this.handleInputChange}
 				/>
-				<label>Subtitle:</label>
+				<label>Title/Name</label>
+
 				<input
+					className="form-input"
 					type="text"
 					name="subtitle"
 					value={this.state.subtitle}
-					placeholder="Subtitle"
 					onChange={this.handleInputChange}
 				/>
-				<label>Message:</label>
+				<label>Subtitle</label>
+
 				<textarea
+					className="form-input"
 					name="message"
 					value={this.state.message}
-					placeholder="Enter Message Here"
 					cols="30"
 					rows="5"
 					onChange={this.handleInputChange}
 				/>
+				<label>Message</label>
 				<button className="confirm">Save Board</button>
 			</form>
 		);
