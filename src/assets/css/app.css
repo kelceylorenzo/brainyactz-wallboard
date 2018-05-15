@@ -297,14 +297,14 @@ button.form {
 
 .page-title {
 	font-family: 'Playfair Display', serif;
-	font-size: 7rem;
+	font-size: 7em;
 	color: #ffffff;
 	text-align: center;
 }
 
 .page-subtitle {
 	font-family: 'Abel';
-	font-size: 3rem;
+	font-size: 3em;
 	color: #d3f707;
 	text-align: center;
 	margin-bottom: 10px;
@@ -339,8 +339,22 @@ button.form {
 .escape-grid-item {
 	height: 100%;
 	width: 100%;
-	background-color: rgb(61, 60, 60);
+	background-color: rgba(0, 0, 0, 0.8);
 	color: #d5d5d5;
+}
+
+.escape-grid-wrapper {
+	height: 100%;
+	width: 100%;
+	background-size: cover;
+}
+
+.escape-grid-item {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	font-size: 0.4rem;
 }
 
 .page-container.escape-grid {
@@ -349,16 +363,6 @@ button.form {
 	justify-items: center;
 	grid-gap: 20px;
 	padding: 20px;
-}
-
-.page-title.escape-grid {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-	width: 100%;
-	font-size: 6rem;
-	background: linear-gradient(rgba(54, 54, 54, 0.4), rgba(54, 54, 54, 0.7), rgba(0, 0, 0, 0.8));
 }
 
 .page-container.social-feed {
