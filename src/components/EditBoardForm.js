@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import base from '../base';
 import TextBoardEditForm from './Forms/TextBoardEditForm';
 import EscapeRoomEditForm from './Forms/EscapeRoomEditForm';
+import GridEditForm from './Forms/GridEditForm';
 
 class EditBoardForm extends Component {
 	constructor(props) {
@@ -58,6 +59,23 @@ class EditBoardForm extends Component {
 							</button>
 						</div>
 						<EscapeRoomEditForm
+							data={this.state.originalBoardData}
+							saveChanges={this.saveChanges}
+							goBack={this.props.history.goBack}
+							boardLocation={this.props.match.params}
+						/>
+						<div>{this.state.feedback}</div>
+					</div>
+				);
+			case 'grid':
+				return (
+					<div>
+						<div className="subheading">
+							<button type="button" onClick={this.props.history.goBack}>
+								←
+							</button>
+						</div>
+						<GridEditForm
 							data={this.state.originalBoardData}
 							saveChanges={this.saveChanges}
 							goBack={this.props.history.goBack}
