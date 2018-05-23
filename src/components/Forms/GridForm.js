@@ -7,6 +7,7 @@ class GridForm extends Component {
 		this.state = {
 			gridToAdd: {
 				title: '',
+				type: 'grid',
 				boards: {}
 			},
 			boardOptions: {},
@@ -24,6 +25,9 @@ class GridForm extends Component {
 			.then(() => {
 				const boardOptions = {};
 				const collections = Object.keys(this.locationCollections).map((currentCollection) => {
+					if (!this.locationCollections[currentCollection].boards) {
+						return;
+					}
 					return Object.keys(this.locationCollections[currentCollection].boards).map((currentBoard) => {
 						if (
 							this.locationCollections[currentCollection].boards[currentBoard].type === 'escape-room'
@@ -112,13 +116,10 @@ class GridForm extends Component {
 		});
 
 		const boardNotification = (
-			<div>
-				You need to have at least 4 escape room boards created to create a grid; please create{' '}
-				{4 - this.state.boardOptions.length} more board(s)
-			</div>
+			<div>Sorry, you need to have at least 4 escape room boards created to create a grid.</div>
 		);
 
-		return this.state.boardOptions.length < 4 ? (
+		return Object.keys(this.state.boardOptions).length < 4 ? (
 			boardNotification
 		) : (
 			<div>
